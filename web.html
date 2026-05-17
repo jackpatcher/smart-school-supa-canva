@@ -1,0 +1,1953 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart School Platform</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="/_sdk/data_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { jakarta: ['Plus Jakarta Sans', 'sans-serif'] },
+          colors: {
+            brand: { 50:'#eff6ff',100:'#dbeafe',200:'#bfdbfe',300:'#93c5fd',400:'#60a5fa',500:'#3b82f6',600:'#2563eb',700:'#1d4ed8' },
+            surface: { 50:'#f8fafc',100:'#f1f5f9',200:'#e2e8f0' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { font-family: 'Plus Jakarta Sans', sans-serif; box-sizing: border-box; }
+    html, body { height: 100%; width: 100%; }
+    #app { height: 100%; width: 100%; overflow: auto; }
+    .sidebar-item { transition: all 0.2s ease; }
+    .sidebar-item:hover { background: rgba(59,130,246,0.08); }
+    .sidebar-item.active { background: rgba(59,130,246,0.12); color: #2563eb; border-right: 3px solid #2563eb; }
+    .card-hover { transition: all 0.3s ease; }
+    .card-hover:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.08); }
+    .fade-in { animation: fadeIn 0.4s ease; }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+    .pulse-dot { animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full bg-surface-50 font-jakarta">
+  <div id="app" class="h-full w-full"><!-- SPLASH SCREEN - ONBOARDING CAROUSEL -->
+   <div id="splash-screen" class="h-full w-full bg-gradient-to-br from-brand-600 via-brand-500 to-blue-600 flex flex-col items-center justify-center p-4">
+    <div class="w-full max-w-md mx-auto flex flex-col items-center justify-between h-full py-8"><!-- Carousel Content -->
+     <div class="flex-1 flex flex-col items-center justify-center text-center">
+      <div id="slide-1" class="splash-slide w-full fade-in">
+       <div class="w-20 h-20 bg-white bg-opacity-20 rounded-3xl flex items-center justify-center mx-auto mb-6 backdrop-blur-sm"><i data-lucide="graduation-cap" class="w-10 h-10 text-white"></i>
+       </div>
+       <h2 class="text-3xl font-bold text-white mb-3">Smart School Platform</h2>
+       <p class="text-white text-opacity-90 text-sm leading-relaxed">All-in-One School Management System<br>
+         Seamlessly manage every aspect of your school</p>
+      </div>
+      <div id="slide-2" class="splash-slide w-full fade-in hidden">
+       <div class="w-20 h-20 bg-white bg-opacity-20 rounded-3xl flex items-center justify-center mx-auto mb-6 backdrop-blur-sm"><i data-lucide="users" class="w-10 h-10 text-white"></i>
+       </div>
+       <h2 class="text-3xl font-bold text-white mb-3">Multi-Tenant Architecture</h2>
+       <p class="text-white text-opacity-90 text-sm leading-relaxed">Support multiple schools with complete data isolation<br>
+         Secure, scalable, and enterprise-ready</p>
+      </div>
+      <div id="slide-3" class="splash-slide w-full fade-in hidden">
+       <div class="w-20 h-20 bg-white bg-opacity-20 rounded-3xl flex items-center justify-center mx-auto mb-6 backdrop-blur-sm"><i data-lucide="zap" class="w-10 h-10 text-white"></i>
+       </div>
+       <h2 class="text-3xl font-bold text-white mb-3">Powerful App Store</h2>
+       <p class="text-white text-opacity-90 text-sm leading-relaxed">Extend functionality with installable apps<br>
+         Customize for your school's unique needs</p>
+      </div>
+     </div><!-- Slide Indicators -->
+     <div class="flex items-center gap-2 mb-6">
+      <div id="dot-1" class="splash-dot w-2.5 h-2.5 bg-white rounded-full transition-all duration-300"></div>
+      <div id="dot-2" class="splash-dot w-2 h-2 bg-white bg-opacity-40 rounded-full transition-all duration-300"></div>
+      <div id="dot-3" class="splash-dot w-2 h-2 bg-white bg-opacity-40 rounded-full transition-all duration-300"></div>
+     </div><!-- Navigation Buttons -->
+     <div class="flex items-center gap-3 w-full"><button id="btn-splash-prev" class="flex-1 px-4 py-3 bg-white bg-opacity-20 hover:bg-opacity-30 text-white font-medium rounded-xl backdrop-blur-sm transition flex items-center justify-center gap-2"> <i data-lucide="chevron-left" class="w-4 h-4"></i> Previous </button> <button id="btn-splash-next" class="flex-1 px-4 py-3 bg-white hover:bg-opacity-90 text-brand-600 font-medium rounded-xl transition flex items-center justify-center gap-2"> Next <i data-lucide="chevron-right" class="w-4 h-4"></i> </button>
+     </div><button id="btn-splash-skip" class="mt-3 w-full text-white text-opacity-70 hover:text-opacity-100 text-sm font-medium transition"> Skip to App → </button>
+    </div>
+   </div><!-- LANDING PAGE -->
+   <div id="landing-page" class="h-full w-full hidden flex flex-col bg-white overflow-y-auto"><!-- Navigation Bar -->
+    <nav class="sticky top-0 z-40 bg-white border-b border-surface-200">
+     <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+       <div class="w-10 h-10 bg-brand-600 rounded-xl flex items-center justify-center shadow-md"><i data-lucide="graduation-cap" class="w-5 h-5 text-white"></i>
+       </div>
+       <h1 id="landing-title" class="text-xl font-bold text-gray-800">Smart School Platform</h1>
+      </div><button id="btn-landing-login" class="px-6 py-2.5 bg-brand-600 hover:bg-brand-700 text-white text-sm font-medium rounded-xl transition shadow-md shadow-brand-200"> Sign In </button>
+     </div>
+    </nav><!-- Hero Section -->
+    <section class="py-16 px-6 bg-gradient-to-br from-brand-50 via-white to-blue-50">
+     <div class="max-w-6xl mx-auto text-center">
+      <div class="inline-block mb-4 px-4 py-1.5 bg-brand-100 text-brand-700 rounded-full text-xs font-semibold">
+       ✨ Transform Your School Management
+      </div>
+      <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">The Complete <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-blue-600">School Management</span> Solution</h2>
+      <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">Streamline operations, enhance communication, and empower educators with our all-in-one platform designed for modern schools.</p><button id="btn-hero-getstarted" class="px-8 py-3.5 bg-brand-600 hover:bg-brand-700 text-white font-medium rounded-xl shadow-lg shadow-brand-200 transition transform hover:scale-105"> Get Started Now </button>
+     </div>
+    </section><!-- Features Grid -->
+    <section class="py-16 px-6">
+     <div class="max-w-6xl mx-auto">
+      <h3 class="text-2xl font-bold text-gray-900 mb-3 text-center">Key Features</h3>
+      <p class="text-gray-600 text-center mb-12">Everything you need to manage your school efficiently</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+       ${[ { icon:'users', title:'Student Management', desc:'Comprehensive student records, enrollment, and profile management' }, { icon:'briefcase', title:'Teacher Management', desc:'Manage teacher information, assignments, and performance' }, { icon:'book-open', title:'Academic Tracking', desc:'Classes, subjects, schedules, and academic progress' }, { icon:'wallet', title:'Finance &amp; Billing', desc:'Fee collection, payment tracking, and financial reports' }, { icon:'calendar', title:'Event Calendar', desc:'Schedule and manage school events and announcements' }, { icon:'grid-3x3-gap-filled', title:'App Store', desc:'Extend functionality with installable apps and integrations' } ].map(f =&gt; ` 
+       <div class="bg-white rounded-2xl border border-surface-200 p-6 card-hover">
+        <div class="w-12 h-12 bg-brand-100 rounded-xl flex items-center justify-center mb-4"><i data-lucide="${f.icon}" class="w-6 h-6 text-brand-600"></i>
+        </div>
+        <h4 class="text-lg font-semibold text-gray-800 mb-2">${f.title}</h4>
+        <p class="text-sm text-gray-600">${f.desc}</p>
+       </div> `).join('')}
+      </div>
+     </div>
+    </section><!-- User Roles Section -->
+    <section class="py-16 px-6 bg-surface-50">
+     <div class="max-w-6xl mx-auto">
+      <h3 class="text-2xl font-bold text-gray-900 mb-3 text-center">Built for Everyone</h3>
+      <p class="text-gray-600 text-center mb-12">Role-based access for all stakeholders</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+       ${[ { role:'Admin', desc:'Full system control', icon:'shield', color:'bg-blue-50 text-blue-600' }, { role:'Teachers', desc:'Class management', icon:'book-open', color:'bg-emerald-50 text-emerald-600' }, { role:'Students', desc:'Coursework access', icon:'graduation-cap', color:'bg-violet-50 text-violet-600' }, { role:'Parents', desc:'Progress tracking', icon:'users', color:'bg-pink-50 text-pink-600' }, { role:'Executive', desc:'Analytics &amp; reports', icon:'bar-chart-3', color:'bg-amber-50 text-amber-600' } ].map(r =&gt; ` 
+       <div class="bg-white rounded-2xl border border-surface-200 p-5 text-center card-hover">
+        <div class="w-12 h-12 ${r.color} rounded-xl flex items-center justify-center mx-auto mb-3"><i data-lucide="${r.icon}" class="w-6 h-6"></i>
+        </div>
+        <h4 class="font-semibold text-gray-800">${r.role}</h4>
+        <p class="text-xs text-gray-500 mt-1">${r.desc}</p>
+       </div> `).join('')}
+      </div>
+     </div>
+    </section><!-- Stats Section -->
+    <section class="py-16 px-6">
+     <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+       ${[ { stat:'10,000+', label:'Schools Worldwide' }, { stat:'500K+', label:'Active Users' }, { stat:'99.9%', label:'Uptime' }, { stat:'24/7', label:'Support' } ].map(s =&gt; ` 
+       <div class="text-center">
+        <p class="text-4xl font-bold text-brand-600 mb-1">${s.stat}</p>
+        <p class="text-gray-600">${s.label}</p>
+       </div> `).join('')}
+      </div>
+     </div>
+    </section><!-- CTA Section -->
+    <section class="py-16 px-6 bg-gradient-to-r from-brand-600 to-blue-600">
+     <div class="max-w-4xl mx-auto text-center">
+      <h3 class="text-3xl font-bold text-white mb-4">Ready to Transform Your School?</h3>
+      <p class="text-white text-opacity-90 mb-8">Start managing your school more efficiently today. Sign in to access all features.</p><button id="btn-cta-login" class="px-8 py-3.5 bg-white hover:bg-opacity-90 text-brand-600 font-medium rounded-xl transition shadow-lg transform hover:scale-105"> Sign In to Dashboard </button>
+     </div>
+    </section><!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 px-6">
+     <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+       <div>
+        <h4 class="font-semibold mb-3">Product</h4>
+        <ul class="space-y-2 text-sm text-gray-400">
+         <li><a href="#" class="hover:text-white transition">Features</a></li>
+         <li><a href="#" class="hover:text-white transition">Pricing</a></li>
+         <li><a href="#" class="hover:text-white transition">Security</a></li>
+        </ul>
+       </div>
+       <div>
+        <h4 class="font-semibold mb-3">Company</h4>
+        <ul class="space-y-2 text-sm text-gray-400">
+         <li><a href="#" class="hover:text-white transition">About</a></li>
+         <li><a href="#" class="hover:text-white transition">Blog</a></li>
+         <li><a href="#" class="hover:text-white transition">Careers</a></li>
+        </ul>
+       </div>
+       <div>
+        <h4 class="font-semibold mb-3">Support</h4>
+        <ul class="space-y-2 text-sm text-gray-400">
+         <li><a href="#" class="hover:text-white transition">Help Center</a></li>
+         <li><a href="#" class="hover:text-white transition">Documentation</a></li>
+         <li><a href="#" class="hover:text-white transition">Contact</a></li>
+        </ul>
+       </div>
+       <div>
+        <h4 class="font-semibold mb-3">Follow Us</h4>
+        <div class="flex gap-3"><a href="#" class="w-8 h-8 bg-gray-800 hover:bg-brand-600 rounded-lg flex items-center justify-center transition"> <i data-lucide="facebook" class="w-4 h-4"></i> </a> <a href="#" class="w-8 h-8 bg-gray-800 hover:bg-brand-600 rounded-lg flex items-center justify-center transition"> <i data-lucide="twitter" class="w-4 h-4"></i> </a> <a href="#" class="w-8 h-8 bg-gray-800 hover:bg-brand-600 rounded-lg flex items-center justify-center transition"> <i data-lucide="linkedin" class="w-4 h-4"></i> </a>
+        </div>
+       </div>
+      </div>
+      <div class="border-t border-gray-800 pt-6 text-center text-sm text-gray-400">
+       <p>© 2024 Smart School Platform. All rights reserved.</p>
+      </div>
+     </div>
+    </footer>
+   </div><!-- LOGIN SCREEN -->
+   <div id="login-screen" class="h-full w-full hidden flex items-center justify-center bg-gradient-to-br from-brand-50 via-white to-blue-50">
+    <div class="w-full max-w-md mx-4 fade-in">
+     <div class="text-center mb-8">
+      <div class="w-16 h-16 bg-brand-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-brand-200"><i data-lucide="graduation-cap" class="w-8 h-8 text-white"></i>
+      </div>
+      <h1 id="login-title" class="text-2xl font-bold text-gray-800">Smart School Platform</h1>
+      <p class="text-gray-500 text-sm mt-1">Multi-School ERP System</p>
+     </div>
+     <div id="login-form-container" class="bg-white rounded-2xl shadow-xl shadow-gray-200/50 p-8">
+      <div id="login-step-1">
+       <h2 class="text-lg font-semibold text-gray-700 mb-5">Sign In</h2>
+       <div class="space-y-4">
+        <div><label for="login-school" class="block text-xs font-medium text-gray-500 mb-1.5">School Code</label> <input id="login-school" type="text" placeholder="e.g. SCH001" class="w-full px-4 py-3 bg-surface-50 border border-surface-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-300 focus:border-brand-400 transition">
+        </div>
+        <div><label for="login-username" class="block text-xs font-medium text-gray-500 mb-1.5">Username</label> <input id="login-username" type="text" placeholder="e.g. admin001" class="w-full px-4 py-3 bg-surface-50 border border-surface-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-300 focus:border-brand-400 transition">
+        </div>
+        <div><label for="login-password" class="block text-xs font-medium text-gray-500 mb-1.5">Password</label> <input id="login-password" type="password" placeholder="••••••••" class="w-full px-4 py-3 bg-surface-50 border border-surface-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-300 focus:border-brand-400 transition">
+        </div><button id="btn-login" class="w-full py-3 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-xl transition shadow-lg shadow-brand-200 active:scale-[0.98]">Sign In</button>
+       </div>
+       <div id="login-error" class="hidden mt-3 text-xs text-red-500 bg-red-50 p-3 rounded-lg"></div>
+      </div>
+      <div id="login-step-2" class="hidden text-center">
+       <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"><i data-lucide="check-circle" class="w-6 h-6 text-green-600"></i>
+       </div>
+       <h3 class="font-semibold text-gray-700 mb-2">Ready to continue?</h3>
+       <p class="text-sm text-gray-500 mb-5">You're all set! Let's get started.</p><button id="btn-continue" class="w-full py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-xl font-medium transition">Continue to Dashboard</button> <button id="btn-change-user" class="mt-3 text-xs text-gray-400 hover:text-gray-600 transition">Use different account</button>
+      </div>
+     </div>
+     <p class="text-center text-xs text-gray-400 mt-6">© 2024 Smart School Platform • Multi-Tenant ERP</p>
+    </div>
+   </div><!-- MAIN APP -->
+   <div id="main-app" class="hidden h-full w-full flex"><!-- Sidebar -->
+    <aside id="sidebar" class="w-64 bg-white border-r border-surface-200 flex flex-col h-full shrink-0">
+     <div class="p-5 border-b border-surface-100">
+      <div class="flex items-center gap-3">
+       <div class="w-10 h-10 bg-brand-600 rounded-xl flex items-center justify-center shadow-md shadow-brand-200"><i data-lucide="graduation-cap" class="w-5 h-5 text-white"></i>
+       </div>
+       <div>
+        <h2 id="school-name-display" class="text-sm font-bold text-gray-800 leading-tight">Demo School</h2><span id="user-role-badge" class="text-[10px] font-semibold bg-brand-100 text-brand-700 px-2 py-0.5 rounded-full uppercase">Admin</span>
+       </div>
+      </div>
+     </div>
+     <nav id="sidebar-nav" class="flex-1 overflow-y-auto py-3 px-2"></nav>
+     <div class="p-4 border-t border-surface-100">
+      <div class="flex items-center gap-3">
+       <div class="w-9 h-9 bg-surface-200 rounded-full flex items-center justify-center"><i data-lucide="user" class="w-4 h-4 text-gray-500"></i>
+       </div>
+       <div class="flex-1 min-w-0">
+        <p id="user-name-display" class="text-xs font-semibold text-gray-700 truncate">Admin User</p>
+        <p id="user-email-display" class="text-[10px] text-gray-400 truncate">admin@school.com</p>
+       </div><button id="btn-logout" class="p-1.5 hover:bg-red-50 rounded-lg transition" title="Logout"> <i data-lucide="log-out" class="w-4 h-4 text-gray-400 hover:text-red-500"></i> </button>
+      </div>
+     </div>
+    </aside><!-- Main Content -->
+    <div class="flex-1 flex flex-col h-full overflow-hidden"><!-- Top Bar -->
+     <header class="h-16 bg-white border-b border-surface-200 flex items-center justify-between px-6 shrink-0">
+      <div>
+       <h1 id="page-title" class="text-lg font-bold text-gray-800">Dashboard</h1>
+       <p id="page-breadcrumb" class="text-xs text-gray-400">Overview</p>
+      </div>
+      <div class="flex items-center gap-3"><button class="p-2 hover:bg-surface-100 rounded-xl relative transition"> <i data-lucide="bell" class="w-5 h-5 text-gray-500"></i> <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full pulse-dot"></span> </button>
+      </div>
+     </header><!-- Page Content -->
+     <main id="page-content" class="flex-1 overflow-y-auto p-6"></main>
+    </div>
+   </div><!-- Toast Container -->
+   <div id="toast-container" class="fixed bottom-5 right-5 z-50 space-y-2"></div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+// ============================================
+// SPLASH SCREEN & LANDING PAGE LOGIC
+// ============================================
+
+let currentSlide = 1;
+const totalSlides = 3;
+
+function updateSplashSlide() {
+    // Hide all slides
+    for (let i = 1; i <= totalSlides; i++) {
+        const slide = document.getElementById(`slide-${i}`);
+        const dot = document.getElementById(`dot-${i}`);
+        slide.classList.add('hidden');
+        dot.classList.remove('w-2.5', 'h-2.5');
+        dot.classList.add('w-2', 'h-2', 'bg-opacity-40');
+    }
+
+    // Show current slide
+    const currentSlideEl = document.getElementById(`slide-${currentSlide}`);
+    const currentDot = document.getElementById(`dot-${currentSlide}`);
+    currentSlideEl.classList.remove('hidden');
+    currentDot.classList.add('w-2.5', 'h-2.5');
+    currentDot.classList.remove('w-2', 'h-2', 'bg-opacity-40');
+
+    // Update button states
+    document.getElementById('btn-splash-prev').disabled = currentSlide === 1;
+    document.getElementById('btn-splash-prev').style.opacity = currentSlide === 1 ? '0.5' : '1';
+}
+
+function goToLandingPage() {
+    document.getElementById('splash-screen').classList.add('hidden');
+    document.getElementById('landing-page').classList.remove('hidden');
+    lucide.createIcons();
+}
+
+function goToLoginPage() {
+    document.getElementById('splash-screen').classList.add('hidden');
+    document.getElementById('landing-page').classList.add('hidden');
+    document.getElementById('login-screen').classList.remove('hidden');
+    lucide.createIcons();
+}
+
+// Splash screen events
+document.getElementById('btn-splash-prev').addEventListener('click', () => {
+    if (currentSlide > 1) {
+        currentSlide--;
+        updateSplashSlide();
+    }
+});
+
+document.getElementById('btn-splash-next').addEventListener('click', () => {
+    if (currentSlide < totalSlides) {
+        currentSlide++;
+        updateSplashSlide();
+    } else {
+        goToLandingPage();
+    }
+});
+
+document.getElementById('btn-splash-skip').addEventListener('click', goToLandingPage);
+
+// Landing page events
+document.getElementById('btn-landing-login').addEventListener('click', goToLoginPage);
+document.getElementById('btn-hero-getstarted').addEventListener('click', goToLoginPage);
+document.getElementById('btn-cta-login').addEventListener('click', goToLoginPage);
+
+// Initialize splash screen
+updateSplashSlide();
+
+// ============================================
+
+// ============================================
+// SMART SCHOOL PLATFORM - Supabase Integration
+// ============================================
+
+let supabaseClient = null;
+
+const APP_STATE = {
+    currentSchool: null,
+    currentRole: 'admin',
+    currentModule: 'dashboard',
+    isAuthenticated: false,
+    allUsers: [],
+    userInstalledApps: [],
+    supabaseUrl: '',
+    supabaseKey: ''
+};
+
+// ============================================
+// SUPABASE INITIALIZATION & FUNCTIONS
+// ============================================
+
+async function initSupabase(url, key) {
+    if (!url || !key) {
+        showToast('Please configure Supabase credentials', 'error');
+        return false;
+    }
+    
+    try {
+        const { createClient } = window.supabase;
+        supabaseClient = createClient(url, key);
+        APP_STATE.supabaseUrl = url;
+        APP_STATE.supabaseKey = key;
+        
+        // Test connection
+        const { error } = await supabaseClient.from('users').select('count', { count: 'exact', head: true });
+        if (error) throw error;
+        
+        showToast('✓ Connected to Supabase!', 'success');
+        return true;
+    } catch (error) {
+        console.error('Supabase error:', error);
+        showToast('Supabase connection failed: ' + error.message, 'error');
+        return false;
+    }
+}
+
+async function authenticateUser(schoolCode, username, password) {
+    if (!supabaseClient) return { success: false, error: 'Supabase not initialized' };
+    
+    try {
+        const { data: users, error } = await supabaseClient
+            .from('users')
+            .select('*')
+            .eq('school_code', schoolCode)
+            .eq('username', username)
+            .eq('status', 'active')
+            .single();
+        
+        if (error || !users) {
+            return { success: false, error: 'User not found or inactive' };
+        }
+        
+        return { success: true, user: users };
+    } catch (error) {
+        return { success: false, error: error.message };
+    }
+}
+
+async function getSupabaseUsers(schoolCode) {
+    if (!supabaseClient) return [];
+    
+    try {
+        const { data, error } = await supabaseClient
+            .from('users')
+            .select(`
+                *,
+                student_profiles (*),
+                teacher_profiles (*)
+            `)
+            .eq('school_code', schoolCode)
+            .order('created_at', { ascending: false });
+        
+        if (error) throw error;
+        APP_STATE.allUsers = data || [];
+        return data || [];
+    } catch (error) {
+        console.error('Error fetching users:', error);
+        return [];
+    }
+}
+
+async function getStudentsFromDB(schoolCode) {
+    if (!supabaseClient) return [];
+    
+    try {
+        const { data, error } = await supabaseClient
+            .from('users')
+            .select(`
+                *,
+                student_profiles (*)
+            `)
+            .eq('school_code', schoolCode)
+            .eq('role', 'student')
+            .order('created_at', { ascending: false });
+        
+        if (error) throw error;
+        return data || [];
+    } catch (error) {
+        console.error('Error fetching students:', error);
+        return [];
+    }
+}
+
+async function getTeachersFromDB(schoolCode) {
+    if (!supabaseClient) return [];
+    
+    try {
+        const { data, error } = await supabaseClient
+            .from('users')
+            .select(`
+                *,
+                teacher_profiles (*)
+            `)
+            .eq('school_code', schoolCode)
+            .eq('role', 'teacher')
+            .order('created_at', { ascending: false });
+        
+        if (error) throw error;
+        return data || [];
+    } catch (error) {
+        console.error('Error fetching teachers:', error);
+        return [];
+    }
+}
+
+async function getPaymentsFromDB(schoolCode) {
+    if (!supabaseClient) return [];
+    
+    try {
+        const { data, error } = await supabaseClient
+            .from('payments')
+            .select(`
+                *,
+                student: student_id (name, email)
+            `)
+            .eq('school_code', schoolCode)
+            .order('created_at', { ascending: false })
+            .limit(100);
+        
+        if (error) throw error;
+        return data || [];
+    } catch (error) {
+        console.error('Error fetching payments:', error);
+        return [];
+    }
+}
+
+async function getAnnouncementsFromDB(schoolCode) {
+    if (!supabaseClient) return [];
+    
+    try {
+        const { data, error } = await supabaseClient
+            .from('announcements')
+            .select('*')
+            .eq('school_code', schoolCode)
+            .or(`expires_at.is.null,expires_at.gt.${new Date().toISOString()}`)
+            .order('created_at', { ascending: false })
+            .limit(50);
+        
+        if (error) throw error;
+        return data || [];
+    } catch (error) {
+        console.error('Error fetching announcements:', error);
+        return [];
+    }
+}
+
+async function getEventsFromDB(schoolCode) {
+    if (!supabaseClient) return [];
+    
+    try {
+        const { data, error } = await supabaseClient
+            .from('events')
+            .select('*')
+            .eq('school_code', schoolCode)
+            .gte('event_date', new Date().toISOString().split('T')[0])
+            .order('event_date', { ascending: true })
+            .limit(50);
+        
+        if (error) throw error;
+        return data || [];
+    } catch (error) {
+        console.error('Error fetching events:', error);
+        return [];
+    }
+}
+
+async function auditLog(schoolCode, username, action, module, details = '') {
+    if (!supabaseClient) return;
+    
+    try {
+        await supabaseClient
+            .from('audit_logs')
+            .insert([{
+                school_code: schoolCode,
+                username,
+                action,
+                module,
+                details,
+                ip_address: 'web',
+                logged_at: new Date().toISOString()
+            }]);
+    } catch (error) {
+        console.error('Audit log error:', error);
+    }
+}
+
+const DEMO_USERS = {
+    'SCH001': {
+        school_name: 'Bright Future Academy',
+        school_code: 'SCH001',
+        theme_color: '#2563eb',
+        users: {
+            'admin001': { password: 'admin123', role: 'admin', name: 'Sarah Johnson', email: 'sarah@brightfuture.edu', phone: '+1-555-0101' },
+            'teacher001': { password: 'teach123', role: 'teacher', name: 'Michael Chen', email: 'michael@brightfuture.edu', phone: '+1-555-0102' },
+            'student001': { password: 'stud123', role: 'student', name: 'Emma Wilson', email: 'emma@brightfuture.edu', phone: '+1-555-0103' },
+            'parent001': { password: 'par123', role: 'parent', name: 'Robert Wilson', email: 'robert@brightfuture.edu', phone: '+1-555-0104' },
+            'exec001': { password: 'exec123', role: 'executive', name: 'Diana Roberts', email: 'diana@brightfuture.edu', phone: '+1-555-0105' }
+        }
+    },
+    'SCH002': {
+        school_name: 'Green Valley School',
+        school_code: 'SCH002',
+        theme_color: '#059669',
+        users: {
+            'admin001': { password: 'admin123', role: 'admin', name: 'John Smith', email: 'john@greenvalley.edu', phone: '+1-555-0201' }
+        }
+    }
+};
+
+const CORE_MODULES = {
+    admin: [
+        { id:'dashboard', icon:'layout-dashboard', label:'Dashboard' },
+        { id:'students', icon:'graduation-cap', label:'Students' },
+        { id:'teachers', icon:'briefcase', label:'Teachers' },
+        { id:'academic', icon:'book-open', label:'Academic' },
+        { id:'finance', icon:'wallet', label:'Finance' },
+        { id:'reports', icon:'bar-chart-3', label:'Reports' },
+        { id:'app-management', icon:'sliders-horizontal', label:'App Management' },
+        { id:'app-store', icon:'grid-3x3-gap-filled', label:'App Store' },
+        { id:'settings', icon:'settings', label:'Settings' }
+    ],
+    teacher: [
+        { id:'dashboard', icon:'layout-dashboard', label:'Dashboard' },
+        { id:'academic', icon:'book-open', label:'My Classes' },
+        { id:'students', icon:'users', label:'My Students' },
+        { id:'app-store', icon:'grid-3x3-gap-filled', label:'App Store' }
+    ],
+    student: [
+        { id:'dashboard', icon:'layout-dashboard', label:'Dashboard' },
+        { id:'academic', icon:'book-open', label:'My Courses' },
+        { id:'app-store', icon:'grid-3x3-gap-filled', label:'App Store' }
+    ],
+    parent: [
+        { id:'dashboard', icon:'layout-dashboard', label:'Dashboard' },
+        { id:'app-store', icon:'grid-3x3-gap-filled', label:'App Store' }
+    ],
+    executive: [
+        { id:'dashboard', icon:'layout-dashboard', label:'Dashboard' },
+        { id:'reports', icon:'bar-chart-3', label:'Analytics' },
+        { id:'finance', icon:'wallet', label:'Finance' },
+        { id:'app-management', icon:'sliders-horizontal', label:'App Management' },
+        { id:'app-store', icon:'grid-3x3-gap-filled', label:'App Store' }
+    ]
+};
+
+let MODULES = JSON.parse(JSON.stringify(CORE_MODULES));
+
+const AVAILABLE_APPS = [
+    { id:'eoffice', name:'eOffice', category:'Workflow', description:'Digital document management', icon:'📄', version:'1.0.0', allowed_roles:['admin','executive','teacher'], permissions:{admin:{canSign:true,canApprove:true,canManage:true},executive:{canSign:true,canApprove:true,canManage:false},teacher:{canSign:true,canApprove:false,canManage:false},student:{},parent:{}} },
+    { id:'library', name:'Library Plus', category:'Academic', description:'Advanced library management', icon:'📚', version:'2.1.0', allowed_roles:['admin','teacher','student'], permissions:{admin:{canManage:true,canBorrow:true},teacher:{canBorrow:true,canManage:false},student:{canBorrow:true,canManage:false},parent:{},executive:{}} },
+    { id:'messaging', name:'School Messaging', category:'Communication', description:'Secure messaging system', icon:'💬', version:'1.5.0', allowed_roles:['admin','teacher','parent'], permissions:{admin:{canManage:true,canMessage:true},teacher:{canMessage:true,canManage:false},student:{},parent:{canMessage:true,canManage:false},executive:{}} },
+    { id:'assignments', name:'Assignment Manager', category:'Academic', description:'Create and grade assignments', icon:'✏️', version:'1.2.0', allowed_roles:['admin','teacher','student','parent'], permissions:{admin:{canManage:true},teacher:{canCreate:true,canGrade:true},student:{canSubmit:true,canView:true},parent:{canView:true},executive:{}} },
+    { id:'events', name:'Event Calendar', category:'General', description:'Event management system', icon:'📅', version:'1.0.0', allowed_roles:['admin','teacher','student','parent','executive'], permissions:{admin:{canManage:true},teacher:{canView:true},student:{canView:true},parent:{canView:true},executive:{canManage:true,canView:true}} },
+    { id:'fees', name:'Fee Management', category:'Finance', description:'Fee collection system', icon:'💰', version:'1.3.0', allowed_roles:['admin','student','parent','executive'], permissions:{admin:{canManage:true,canCollect:true},teacher:{},student:{canPayOnline:true,canView:true},parent:{canPayOnline:true,canView:true},executive:{canManage:true,canView:true}} },
+    { id:'transport', name:'Transport Tracking', category:'Operations', description:'Bus tracking system', icon:'🚌', version:'1.4.0', allowed_roles:['admin','teacher','student','parent','executive'], permissions:{admin:{canManage:true},teacher:{canView:true},student:{canTrack:true},parent:{canTrack:true},executive:{canManage:true}} },
+    { id:'hostel', name:'Hostel Management', category:'Operations', description:'Hostel management system', icon:'🏠', version:'1.1.0', allowed_roles:['admin','teacher','student','parent','executive'], permissions:{admin:{canManage:true},teacher:{canView:true},student:{canRequest:true,canView:true},parent:{canView:true},executive:{canManage:true}} }
+];
+
+// ============================================
+// AUTH SYSTEM
+// ============================================
+
+function handleLogin(e) {
+    e.preventDefault();
+    const schoolCode = document.getElementById('login-school').value.trim().toUpperCase();
+    const username = document.getElementById('login-username').value.trim();
+    const password = document.getElementById('login-password').value;
+    const errorEl = document.getElementById('login-error');
+    errorEl.classList.add('hidden');
+
+    if (!schoolCode || !username || !password) {
+        errorEl.textContent = 'Please fill in all fields.';
+        errorEl.classList.remove('hidden');
+        return;
+    }
+
+    const school = DEMO_USERS[schoolCode];
+    if (!school) {
+        errorEl.textContent = 'School code not found. Try SCH001 or SCH002.';
+        errorEl.classList.remove('hidden');
+        return;
+    }
+
+    const user = school.users[username];
+    if (!user || user.password !== password) {
+        errorEl.textContent = 'Invalid username or password.';
+        errorEl.classList.remove('hidden');
+        return;
+    }
+
+    APP_STATE.currentUser = { username, school_code: schoolCode, ...user };
+    APP_STATE.currentSchool = { code: schoolCode, ...school };
+    APP_STATE.currentRole = user.role;
+
+    document.getElementById('login-step-1').classList.add('hidden');
+    document.getElementById('login-step-2').classList.remove('hidden');
+}
+
+function completeLogin() {
+    APP_STATE.isAuthenticated = true;
+    document.getElementById('login-screen').classList.add('hidden');
+    document.getElementById('main-app').classList.remove('hidden');
+    document.getElementById('main-app').classList.add('flex');
+    initMainApp();
+    showToast('Welcome back, ' + APP_STATE.currentUser.name + '!', 'success');
+    if (APP_STATE.currentRole === 'admin' && supabaseClient) {
+        getSupabaseUsers(APP_STATE.currentSchool.code);
+    }
+}
+
+function handleLogout() {
+    APP_STATE.isAuthenticated = false;
+    APP_STATE.currentUser = null;
+    APP_STATE.allUsers = [];
+    document.getElementById('main-app').classList.add('hidden');
+    document.getElementById('main-app').classList.remove('flex');
+    document.getElementById('login-screen').classList.remove('hidden');
+    document.getElementById('login-step-1').classList.remove('hidden');
+    document.getElementById('login-step-2').classList.add('hidden');
+    document.getElementById('login-password').value = '';
+}
+
+// ============================================
+// DATA SDK INTEGRATION
+// ============================================
+
+let dataHandler = {
+    onDataChanged(data) {
+        APP_STATE.allUsers = data || [];
+        if (APP_STATE.currentModule === 'admin-users') {
+            renderAdminUsersTable();
+        }
+    }
+};
+
+async function initDataSDK() {
+    const result = await window.dataSdk.init(dataHandler);
+    if (!result.isOk) console.error('Data SDK init error:', result.error);
+}
+
+// ============================================
+// MAIN APP INITIALIZATION
+// ============================================
+
+function initMainApp() {
+    document.getElementById('school-name-display').textContent = APP_STATE.currentSchool.school_name;
+    document.getElementById('user-role-badge').textContent = APP_STATE.currentRole.toUpperCase();
+    document.getElementById('user-name-display').textContent = APP_STATE.currentUser.name;
+    document.getElementById('user-email-display').textContent = APP_STATE.currentUser.email;
+    loadUserInstalledApps();
+    renderSidebar();
+    navigateTo('dashboard');
+    initDataSDK();
+}
+
+function loadUserInstalledApps() {
+    const key = `apps_${APP_STATE.currentSchool.code}_${APP_STATE.currentUser.username}`;
+    const installed = localStorage.getItem(key);
+    APP_STATE.userInstalledApps = installed ? JSON.parse(installed) : [];
+}
+
+function renderSidebar() {
+    const nav = document.getElementById('sidebar-nav');
+    const modules = MODULES[APP_STATE.currentRole] || MODULES.admin;
+    nav.innerHTML = modules.map(m => `
+        <button class="sidebar-item w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm text-gray-600 font-medium ${APP_STATE.currentModule === m.id ? 'active' : ''}" data-module="${m.id}">
+            <i data-lucide="${m.icon}" class="w-[18px] h-[18px]"></i>
+            <span>${m.label}</span>
+        </button>
+    `).join('');
+
+    nav.querySelectorAll('.sidebar-item').forEach(btn => {
+        btn.addEventListener('click', () => navigateTo(btn.dataset.module));
+    });
+    lucide.createIcons();
+}
+
+function navigateTo(moduleId) {
+    APP_STATE.currentModule = moduleId;
+    renderSidebar();
+    const content = document.getElementById('page-content');
+    const titleEl = document.getElementById('page-title');
+    const breadcrumb = document.getElementById('page-breadcrumb');
+    const mod = (MODULES[APP_STATE.currentRole] || MODULES.admin).find(m => m.id === moduleId);
+    titleEl.textContent = mod ? mod.label : 'Dashboard';
+    breadcrumb.textContent = APP_STATE.currentSchool.school_name + ' • ' + APP_STATE.currentRole;
+    content.innerHTML = '<div class="fade-in">' + getModuleContent(moduleId) + '</div>';
+    lucide.createIcons();
+}
+
+// ============================================
+// MODULE CONTENT RENDERERS
+// ============================================
+
+function getModuleContent(moduleId) {
+    switch(moduleId) {
+        case 'dashboard': return getDashboardContent();
+        case 'app-management': return getAppManagementContent();
+        case 'app-store': return getAppStoreContent();
+        case 'students': return getStudentsContent();
+        case 'teachers': return getTeachersContent();
+        case 'academic': return getAcademicContent();
+        case 'finance': return getFinanceContent();
+        case 'reports': return getReportsContent();
+        case 'settings': return getSettingsContent();
+        default: return getGenericModule(moduleId);
+    }
+}
+
+function getDashboardContent() {
+    const stats = APP_STATE.currentRole === 'admin' ? [
+        { label:'Total Students', value:'1,247', icon:'users', color:'blue', change:'+12%' },
+        { label:'Teachers', value:'86', icon:'briefcase', color:'emerald', change:'+3' },
+        { label:'Attendance Today', value:'94.2%', icon:'check-circle', color:'violet', change:'+1.2%' },
+        { label:'Revenue (Month)', value:'$142K', icon:'wallet', color:'amber', change:'+8%' }
+    ] : [
+        { label:'My Courses', value:'6', icon:'book-open', color:'blue', change:'' },
+        { label:'Attendance', value:'97%', icon:'check-circle', color:'emerald', change:'' },
+        { label:'GPA', value:'3.82', icon:'award', color:'violet', change:'+0.1' },
+        { label:'Assignments', value:'3', icon:'file-text', color:'amber', change:'Due soon' }
+    ];
+    const colorMap = { blue:'from-blue-500 to-blue-600', emerald:'from-emerald-500 to-emerald-600', violet:'from-violet-500 to-violet-600', amber:'from-amber-500 to-amber-600' };
+    return `
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            ${stats.map(s => `
+                <div class="bg-white rounded-2xl p-5 border border-surface-200 card-hover">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="w-10 h-10 bg-gradient-to-br ${colorMap[s.color]} rounded-xl flex items-center justify-center shadow-lg">
+                            <i data-lucide="${s.icon}" class="w-5 h-5 text-white"></i>
+                        </div>
+                        ${s.change ? `<span class="text-xs font-medium text-green-600 bg-green-50 px-2 py-0.5 rounded-full">${s.change}</span>` : ''}
+                    </div>
+                    <p class="text-2xl font-bold text-gray-800">${s.value}</p>
+                    <p class="text-xs text-gray-500 mt-0.5">${s.label}</p>
+                </div>
+            `).join('')}
+        </div>
+        <div class="bg-white rounded-2xl border border-surface-200 p-5">
+            <h3 class="font-semibold text-gray-800 mb-3 flex items-center gap-2"><i data-lucide="activity" class="w-4 h-4 text-brand-500"></i> Recent Activity</h3>
+            <div class="space-y-2">
+                ${[
+                    { text:'New student enrolled: Aisha Rahman', time:'2 min ago', dot:'bg-green-400' },
+                    { text:'Grade report submitted', time:'15 min ago', dot:'bg-blue-400' },
+                    { text:'Payment received: $2,400', time:'1 hr ago', dot:'bg-amber-400' },
+                    { text:'Attendance marked', time:'2 hrs ago', dot:'bg-violet-400' }
+                ].map(a => `
+                    <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-50 transition">
+                        <span class="w-2 h-2 ${a.dot} rounded-full shrink-0"></span>
+                        <p class="text-sm text-gray-700 flex-1">${a.text}</p>
+                        <span class="text-[10px] text-gray-400 shrink-0">${a.time}</span>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    `;
+}
+
+function getAppManagementContent() {
+    const enabledAppsKey = `apps_enabled_${APP_STATE.currentSchool.code}`;
+    const enabledApps = JSON.parse(localStorage.getItem(enabledAppsKey) || '[]');
+    return `
+        <div class="mb-6">
+            <h2 class="text-xl font-bold text-gray-800 mb-1">App Management</h2>
+            <p class="text-sm text-gray-500">Enable or disable apps globally for all users</p>
+        </div>
+        <div class="space-y-3">
+            ${AVAILABLE_APPS.map(app => {
+                const isEnabled = enabledApps.includes(app.id);
+                return `
+                    <div class="bg-white rounded-2xl border border-surface-200 p-5 flex items-start justify-between hover:border-surface-300 transition">
+                        <div class="flex items-start gap-4 flex-1">
+                            <div class="text-3xl">${app.icon}</div>
+                            <div class="flex-1">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <h3 class="font-semibold text-gray-800">${app.name}</h3>
+                                    <span class="text-xs font-medium bg-surface-100 text-gray-600 px-2 py-0.5 rounded-full">${app.category}</span>
+                                    ${isEnabled ? `<span class="text-xs font-medium bg-green-100 text-green-700 px-2 py-0.5 rounded-full">✓ Active</span>` : `<span class="text-xs font-medium bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">Inactive</span>`}
+                                </div>
+                                <p class="text-sm text-gray-600 mb-2">${app.description}</p>
+                                <div class="bg-blue-50 rounded-lg p-2.5 text-xs">
+                                    <p class="font-semibold text-blue-700 mb-1">Available for:</p>
+                                    <div class="flex flex-wrap gap-1.5">
+                                        ${Object.entries(app.permissions).map(([role, perms]) => Object.values(perms).some(v => v) ? `<span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded capitalize font-medium">${role}</span>` : '').join('')}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <label class="flex items-center gap-3 ml-4 cursor-pointer">
+                            <input type="checkbox" ${isEnabled ? 'checked' : ''} onchange="toggleAppGlobal('${app.id}', this.checked)" class="w-5 h-5 rounded accent-brand-600">
+                        </label>
+                    </div>
+                `;
+            }).join('')}
+        </div>
+    `;
+}
+
+function getAppStoreContent() {
+    const installedApps = APP_STATE.userInstalledApps || [];
+    const enabledAppsKey = `apps_enabled_${APP_STATE.currentSchool.code}`;
+    const enabledApps = JSON.parse(localStorage.getItem(enabledAppsKey) || '[]');
+    const availableForRole = AVAILABLE_APPS.filter(app => app.permissions[APP_STATE.currentRole] && Object.values(app.permissions[APP_STATE.currentRole]).some(v => v) && enabledApps.includes(app.id));
+
+    return `
+        <div class="mb-6">
+            <h2 class="text-xl font-bold text-gray-800 mb-1">App Store</h2>
+            <p class="text-sm text-gray-500">Discover and install apps for ${APP_STATE.currentRole}</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            ${availableForRole.map(app => {
+                const isInstalled = installedApps.some(ia => ia.app_id === app.id);
+                return `
+                    <div class="bg-white rounded-2xl border border-surface-200 p-5 card-hover flex flex-col">
+                        <div class="flex items-start justify-between mb-3">
+                            <div class="text-4xl">${app.icon}</div>
+                            ${isInstalled ? `<span class="text-xs font-medium bg-green-50 text-green-700 px-2.5 py-1 rounded-full">✓ Installed</span>` : `<span class="text-xs font-medium bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full">Available</span>`}
+                        </div>
+                        <h3 class="font-semibold text-gray-800 mb-1">${app.name}</h3>
+                        <p class="text-xs text-gray-400 mb-2">${app.category}</p>
+                        <p class="text-sm text-gray-600 mb-3 flex-1">${app.description}</p>
+                        <div class="bg-surface-50 rounded-lg p-3 mb-4">
+                            <p class="text-xs font-semibold text-gray-600 mb-2">Your Permissions:</p>
+                            <div class="space-y-1">
+                                ${Object.entries(app.permissions[APP_STATE.currentRole] || {}).map(([perm, has]) => `
+                                    <div class="flex items-center gap-2 text-xs">
+                                        <span class="w-4 h-4 rounded flex items-center justify-center ${has ? 'bg-green-100' : 'bg-gray-100'}">
+                                            ${has ? '<i data-lucide="check" class="w-3 h-3 text-green-600"></i>' : '<i data-lucide="x" class="w-3 h-3 text-gray-400"></i>'}
+                                        </span>
+                                        <span class="text-gray-600 capitalize">${perm.replace(/([A-Z])/g, ' $1').trim()}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between pt-3 border-t border-surface-100">
+                            <span class="text-xs text-gray-400">v${app.version}</span>
+                            <button class="px-3 py-1.5 text-xs font-medium ${isInstalled ? 'bg-surface-100 text-gray-600 hover:bg-surface-200' : 'bg-brand-600 text-white hover:bg-brand-700'} rounded-lg transition" onclick="handleAppAction('${app.id}', ${isInstalled}, event)">
+                                ${isInstalled ? 'Remove' : 'Install'}
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('')}
+        </div>
+        ${availableForRole.length === 0 ? `
+            <div class="bg-white rounded-2xl border border-surface-200 p-12 text-center">
+                <i data-lucide="inbox" class="w-12 h-12 text-gray-300 mx-auto mb-3"></i>
+                <p class="text-gray-500 font-medium">No enabled apps available</p>
+                <p class="text-sm text-gray-400 mt-1">Ask your admin to enable apps in App Management</p>
+            </div>
+        ` : ''}
+    `;
+}
+
+function getStudentsContent() {
+    const students = [
+        { id:'STU001', name:'Emma Wilson', grade:'10-A', gpa:'3.9', status:'Active' },
+        { id:'STU002', name:'Liam Parker', grade:'10-B', gpa:'3.7', status:'Active' },
+        { id:'STU003', name:'Aisha Rahman', grade:'9-A', gpa:'3.85', status:'Active' }
+    ];
+    return `
+        <div class="bg-white rounded-2xl border border-surface-200 overflow-hidden">
+            <table class="w-full"><thead class="bg-surface-50"><tr>
+                <th class="text-left text-xs font-semibold text-gray-500 uppercase px-5 py-3">Student</th>
+                <th class="text-left text-xs font-semibold text-gray-500 uppercase px-5 py-3">Grade</th>
+                <th class="text-left text-xs font-semibold text-gray-500 uppercase px-5 py-3">GPA</th>
+                <th class="text-left text-xs font-semibold text-gray-500 uppercase px-5 py-3">Status</th>
+            </tr></thead><tbody class="divide-y divide-surface-100">
+                ${students.map(s => `<tr class="hover:bg-surface-50 transition">
+                    <td class="px-5 py-4"><div class="flex items-center gap-3"><div class="w-9 h-9 bg-brand-100 text-brand-700 rounded-full flex items-center justify-center text-sm font-bold">${s.name[0]}</div><span class="text-sm font-medium text-gray-800">${s.name}</span></div></td>
+                    <td class="px-5 py-4 text-sm text-gray-600">${s.grade}</td>
+                    <td class="px-5 py-4 text-sm font-semibold text-gray-800">${s.gpa}</td>
+                    <td class="px-5 py-4"><span class="text-xs font-medium bg-green-50 text-green-700 px-2.5 py-1 rounded-full">${s.status}</span></td>
+                </tr>`).join('')}
+            </tbody></table>
+        </div>
+    `;
+}
+
+function getTeachersContent() {
+    const teachers = [
+        { name:'Michael Chen', subject:'Mathematics', classes:5, students:164 },
+        { name:'Patricia Gomez', subject:'English', classes:4, students:132 },
+        { name:'Ahmed Hassan', subject:'Physics', classes:3, students:96 }
+    ];
+    return `
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            ${teachers.map(t => `
+                <div class="bg-white rounded-2xl border border-surface-200 p-5 card-hover">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-brand-100 rounded-xl flex items-center justify-center text-brand-600 font-bold">${t.name[0]}</div>
+                        <div><p class="text-sm font-semibold text-gray-800">${t.name}</p><p class="text-xs text-gray-500">${t.subject}</p></div>
+                    </div>
+                    <div class="flex justify-between text-center border-t border-surface-100 pt-3">
+                        <div><p class="text-lg font-bold text-gray-800">${t.classes}</p><p class="text-[10px] text-gray-400">Classes</p></div>
+                        <div><p class="text-lg font-bold text-gray-800">${t.students}</p><p class="text-[10px] text-gray-400">Students</p></div>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+    `;
+}
+
+function getAcademicContent() {
+    return `
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="bg-white rounded-2xl border border-surface-200 p-5 card-hover">
+                <div class="flex items-center gap-3 mb-2"><div class="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center"><i data-lucide="calendar" class="w-5 h-5 text-blue-600"></i></div><span class="text-sm font-semibold text-gray-700">Academic Year</span></div>
+                <p class="text-xl font-bold text-gray-800">2024-2025</p><p class="text-xs text-gray-500">Semester 2</p>
+            </div>
+            <div class="bg-white rounded-2xl border border-surface-200 p-5 card-hover">
+                <div class="flex items-center gap-3 mb-2"><div class="w-10 h-10 bg-emerald-50 rounded-xl flex items-center justify-center"><i data-lucide="book-open" class="w-5 h-5 text-emerald-600"></i></div><span class="text-sm font-semibold text-gray-700">Subjects</span></div>
+                <p class="text-xl font-bold text-gray-800">32</p><p class="text-xs text-gray-500">Across all grades</p>
+            </div>
+            <div class="bg-white rounded-2xl border border-surface-200 p-5 card-hover">
+                <div class="flex items-center gap-3 mb-2"><div class="w-10 h-10 bg-violet-50 rounded-xl flex items-center justify-center"><i data-lucide="layout-grid" class="w-5 h-5 text-violet-600"></i></div><span class="text-sm font-semibold text-gray-700">Classes</span></div>
+                <p class="text-xl font-bold text-gray-800">48</p><p class="text-xs text-gray-500">Active sections</p>
+            </div>
+        </div>
+    `;
+}
+
+function getFinanceContent() {
+    return `
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl p-5 text-white shadow-lg"><p class="text-sm opacity-80">Total Revenue</p><p class="text-2xl font-bold mt-1">$1,420,000</p></div>
+            <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-5 text-white shadow-lg"><p class="text-sm opacity-80">Collected</p><p class="text-2xl font-bold mt-1">$1,180,000</p></div>
+            <div class="bg-gradient-to-br from-amber-500 to-amber-600 rounded-2xl p-5 text-white shadow-lg"><p class="text-sm opacity-80">Pending</p><p class="text-2xl font-bold mt-1">$240,000</p></div>
+        </div>
+    `;
+}
+
+function getReportsContent() {
+    return `
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            ${[
+                { title:'Enrollment Report', icon:'users', color:'bg-blue-50 text-blue-600' },
+                { title:'Attendance Report', icon:'check-circle', color:'bg-emerald-50 text-emerald-600' },
+                { title:'Financial Report', icon:'wallet', color:'bg-amber-50 text-amber-600' },
+                { title:'Academic Performance', icon:'award', color:'bg-violet-50 text-violet-600' }
+            ].map(r => `
+                <div class="bg-white rounded-2xl border border-surface-200 p-5 card-hover">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 ${r.color} rounded-xl flex items-center justify-center"><i data-lucide="${r.icon}" class="w-5 h-5"></i></div>
+                        <h4 class="text-sm font-semibold text-gray-800">${r.title}</h4>
+                    </div>
+                    <button class="text-xs font-medium text-brand-600"><i data-lucide="download" class="w-3 h-3 inline mr-1"></i> Generate</button>
+                </div>
+            `).join('')}
+        </div>
+    `;
+}
+
+function getSettingsContent() {
+    return `
+        <div class="max-w-2xl">
+            <div class="bg-white rounded-2xl border border-surface-200 p-6">
+                <h3 class="font-semibold text-gray-800 mb-4">School Settings</h3>
+                <div class="space-y-4">
+                    <div><label class="block text-xs font-medium text-gray-500 mb-1">School Name</label><input type="text" value="${APP_STATE.currentSchool.school_name}" class="w-full px-4 py-2.5 bg-surface-50 border border-surface-200 rounded-xl text-sm"></div>
+                    <button class="px-5 py-2.5 bg-brand-600 hover:bg-brand-700 text-white text-sm font-medium rounded-xl transition">Save</button>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function getGenericModule(id) {
+    const title = id.replace(/-/g,' ').replace(/\b\w/g,l=>l.toUpperCase());
+    return `
+        <div class="bg-white rounded-2xl border border-surface-200 p-8 text-center">
+            <i data-lucide="construction" class="w-12 h-12 text-gray-300 mx-auto mb-3"></i>
+            <h3 class="text-lg font-semibold text-gray-700">${title}</h3>
+            <p class="text-sm text-gray-500 mt-2">Coming soon</p>
+        </div>
+    `;
+}
+
+function handleAppAction(appId, isInstalled, e) {
+    e.preventDefault();
+    const key = `apps_${APP_STATE.currentSchool.code}_${APP_STATE.currentUser.username}`;
+    if (isInstalled) {
+        APP_STATE.userInstalledApps = APP_STATE.userInstalledApps.filter(a => a.app_id !== appId);
+        showToast('App removed', 'success');
+    } else {
+        const app = AVAILABLE_APPS.find(a => a.id === appId);
+        APP_STATE.userInstalledApps.push({ app_id: appId, app_name: app.name, installed_at: new Date().toISOString() });
+        showToast(app.name + ' installed!', 'success');
+    }
+    localStorage.setItem(key, JSON.stringify(APP_STATE.userInstalledApps));
+    navigateTo('app-store');
+}
+
+function toggleAppGlobal(appId, isEnabled) {
+    const enabledAppsKey = `apps_enabled_${APP_STATE.currentSchool.code}`;
+    let enabledApps = JSON.parse(localStorage.getItem(enabledAppsKey) || '[]');
+    if (isEnabled) {
+        if (!enabledApps.includes(appId)) enabledApps.push(appId);
+        showToast('App enabled', 'success');
+    } else {
+        enabledApps = enabledApps.filter(id => id !== appId);
+        showToast('App disabled', 'success');
+    }
+    localStorage.setItem(enabledAppsKey, JSON.stringify(enabledApps));
+    navigateTo('app-management');
+}
+
+// ============================================
+// TOAST SYSTEM
+// ============================================
+
+function showToast(message, type='info') {
+    const container = document.getElementById('toast-container');
+    const colors = { success:'bg-green-600', error:'bg-red-600', info:'bg-brand-600' };
+    const icons = { success:'check-circle', error:'alert-circle', info:'info' };
+    const toast = document.createElement('div');
+    toast.className = `${colors[type]} text-white px-5 py-3 rounded-xl shadow-lg flex items-center gap-3 text-sm font-medium fade-in`;
+    toast.innerHTML = `<i data-lucide="${icons[type]}" class="w-4 h-4"></i><span>${message}</span>`;
+    container.appendChild(toast);
+    lucide.createIcons();
+    setTimeout(() => { toast.style.opacity='0'; toast.style.transition='opacity 0.3s'; setTimeout(()=>toast.remove(),300); }, 3500);
+}
+
+// ============================================
+// EVENT LISTENERS
+// ============================================
+
+document.getElementById('btn-login').addEventListener('click', handleLogin);
+document.getElementById('login-password').addEventListener('keydown', e => { if(e.key==='Enter') handleLogin(e); });
+document.getElementById('btn-continue').addEventListener('click', completeLogin);
+document.getElementById('btn-logout').addEventListener('click', handleLogout);
+
+// ============================================
+// ELEMENT SDK INITIALIZATION
+// ============================================
+
+const defaultConfig = {
+    platform_title: 'Smart School Platform',
+    platform_tagline: 'All-in-One School Management System',
+    school_name: 'Your School',
+    school_code: 'SCH001',
+    supabase_url: '',
+    supabase_key: '',
+    primary_color: '#2563eb',
+    accent_color: '#059669'
+};
+
+window.elementSdk.init({
+    defaultConfig,
+    onConfigChange: async (config) => {
+        document.getElementById('login-title').textContent = config.platform_title || defaultConfig.platform_title;
+        document.title = config.platform_title || defaultConfig.platform_title;
+        
+        // Initialize Supabase if credentials provided
+        if (config.supabase_url && config.supabase_key && !supabaseClient) {
+            await initSupabase(config.supabase_url, config.supabase_key);
+        }
+    },
+    mapToCapabilities: (config) => ({
+        recolorables: [
+            { get: () => config.primary_color || defaultConfig.primary_color, set: (v) => { config.primary_color = v; window.elementSdk.setConfig({ primary_color: v }); } },
+            { get: () => config.accent_color || defaultConfig.accent_color, set: (v) => { config.accent_color = v; window.elementSdk.setConfig({ accent_color: v }); } }
+        ],
+        borderables: [],
+        fontEditable: undefined,
+        fontSizeable: undefined
+    }),
+    mapToEditPanelValues: (config) => new Map([
+        ['platform_title', config.platform_title || defaultConfig.platform_title],
+        ['platform_tagline', config.platform_tagline || defaultConfig.platform_tagline],
+        ['school_name', config.school_name || defaultConfig.school_name],
+        ['school_code', config.school_code || defaultConfig.school_code],
+        ['supabase_url', config.supabase_url || ''],
+        ['supabase_key', config.supabase_key || '']
+    ])
+});
+
+lucide.createIcons();
+  </script>
+  <script>
+// ============================================
+// SMART SCHOOL PLATFORM - Core Application
+// ============================================
+
+const APP_STATE = {
+    currentUser: null,
+    currentSchool: null,
+    currentRole: 'admin',
+    currentModule: 'dashboard',
+    isAuthenticated: false,
+    allUsers: []
+};
+
+// Demo users database with persistent storage
+const DEMO_USERS = {
+    'SCH001': {
+        school_name: 'Bright Future Academy',
+        school_code: 'SCH001',
+        theme_color: '#2563eb',
+        users: {
+            'admin001': { password: 'admin123', role: 'admin', name: 'Sarah Johnson', email: 'sarah@brightfuture.edu', phone: '+1-555-0101' },
+            'teacher001': { password: 'teach123', role: 'teacher', name: 'Michael Chen', email: 'michael@brightfuture.edu', phone: '+1-555-0102' },
+            'student001': { password: 'stud123', role: 'student', name: 'Emma Wilson', email: 'emma@brightfuture.edu', phone: '+1-555-0103' },
+            'parent001': { password: 'par123', role: 'parent', name: 'Robert Wilson', email: 'robert@brightfuture.edu', phone: '+1-555-0104' },
+            'exec001': { password: 'exec123', role: 'executive', name: 'Diana Roberts', email: 'diana@brightfuture.edu', phone: '+1-555-0105' }
+        }
+    },
+    'SCH002': {
+        school_name: 'Green Valley School',
+        school_code: 'SCH002',
+        theme_color: '#059669',
+        users: {
+            'admin001': { password: 'admin123', role: 'admin', name: 'John Smith', email: 'john@greenvalley.edu', phone: '+1-555-0201' }
+        }
+    }
+};
+
+// ============================================
+// DATA SDK INTEGRATION
+// ============================================
+
+let dataHandler = {
+    onDataChanged(data) {
+        APP_STATE.allUsers = data || [];
+        if (APP_STATE.currentModule === 'admin-users') {
+            renderAdminUsersTable();
+        }
+    }
+};
+
+async function initDataSDK() {
+    const result = await window.dataSdk.init(dataHandler);
+    if (!result.isOk) {
+        console.error('Failed to initialize data SDK:', result.error);
+    }
+}
+
+async function loadUsersFromDatabase() {
+    const result = await window.dataSdk.readAll?.() || { isOk: true, data: [] };
+    if (result.isOk) {
+        APP_STATE.allUsers = result.data || [];
+    }
+}
+
+async function saveUserToDatabase(userData) {
+    if (!APP_STATE.currentUser) return false;
+    
+    const record = {
+        id: userData.id || `user_${Date.now()}`,
+        school_code: APP_STATE.currentSchool.code,
+        user_id: APP_STATE.currentUser.username,
+        username: userData.username || '',
+        role: userData.role || 'user',
+        name: userData.name || '',
+        email: userData.email || '',
+        phone: userData.phone || '',
+        status: userData.status || 'active',
+        created_at: userData.created_at || new Date().toISOString(),
+        updated_at: new Date().toISOString()
+    };
+
+    if (userData.__backendId) {
+        const result = await window.dataSdk.update(record);
+        if (result.isOk) {
+            showToast('User updated successfully', 'success');
+            return true;
+        } else {
+            showToast('Failed to update user', 'error');
+            return false;
+        }
+    } else {
+        const result = await window.dataSdk.create(record);
+        if (result.isOk) {
+            showToast('User added successfully', 'success');
+            return true;
+        } else {
+            showToast('Failed to add user', 'error');
+            return false;
+        }
+    }
+}
+
+async function deleteUserFromDatabase(record) {
+    const result = await window.dataSdk.delete(record);
+    if (result.isOk) {
+        showToast('User deleted successfully', 'success');
+        return true;
+    } else {
+        showToast('Failed to delete user', 'error');
+        return false;
+    }
+}
+    teacher: [
+        { id:'dashboard', icon:'layout-dashboard', label:'Dashboard' },
+        { id:'academic', icon:'book-open', label:'My Classes' },
+        { id:'students', icon:'users', label:'My Students' },
+        { id:'attendance', icon:'check-square', label:'Attendance' },
+        { id:'grades', icon:'file-text', label:'Grades' },
+        { id:'notifications', icon:'bell', label:'Notifications' }
+    ],
+    student: [
+        { id:'dashboard', icon:'layout-dashboard', label:'Dashboard' },
+        { id:'academic', icon:'book-open', label:'My Courses' },
+        { id:'grades', icon:'award', label:'My Grades' },
+        { id:'attendance', icon:'calendar', label:'Attendance' },
+        { id:'library', icon:'book', label:'Library' },
+        { id:'notifications', icon:'bell', label:'Notifications' }
+    ],
+    parent: [
+        { id:'dashboard', icon:'layout-dashboard', label:'Dashboard' },
+        { id:'children', icon:'users', label:'My Children' },
+        { id:'grades', icon:'award', label:'Grades' },
+        { id:'finance', icon:'wallet', label:'Payments' },
+        { id:'notifications', icon:'bell', label:'Notifications' }
+    ],
+    executive: [
+        { id:'dashboard', icon:'layout-dashboard', label:'Dashboard' },
+        { id:'reports', icon:'bar-chart-3', label:'Analytics' },
+        { id:'finance', icon:'wallet', label:'Finance' },
+        { id:'school-office', icon:'building-2', label:'School Office' },
+        { id:'settings', icon:'settings', label:'Settings' }
+    ]
+};
+
+// ============================================
+// AUTH SYSTEM
+// ============================================
+
+function handleLogin(e) {
+    e.preventDefault();
+    const schoolCode = document.getElementById('login-school').value.trim().toUpperCase();
+    const username = document.getElementById('login-username').value.trim();
+    const password = document.getElementById('login-password').value;
+
+    const errorEl = document.getElementById('login-error');
+    errorEl.classList.add('hidden');
+
+    if (!schoolCode || !username || !password) {
+        errorEl.textContent = 'Please fill in all fields.';
+        errorEl.classList.remove('hidden');
+        return;
+    }
+
+    // Try Supabase first if connected
+    if (supabaseClient) {
+        authenticateWithSupabase(schoolCode, username, password);
+    } else {
+        // Fall back to demo users
+        const school = DEMO_USERS[schoolCode];
+        if (!school) {
+            errorEl.textContent = 'School code not found. Try SCH001 or SCH002.';
+            errorEl.classList.remove('hidden');
+            return;
+        }
+
+        const user = school.users[username];
+        if (!user || user.password !== password) {
+            errorEl.textContent = 'Invalid username or password.';
+            errorEl.classList.remove('hidden');
+            return;
+        }
+
+        APP_STATE.currentUser = { username, school_code: schoolCode, ...user };
+        APP_STATE.currentSchool = { code: schoolCode, ...school };
+        APP_STATE.currentRole = user.role;
+
+        document.getElementById('login-step-1').classList.add('hidden');
+        document.getElementById('login-step-2').classList.remove('hidden');
+    }
+}
+
+async function authenticateWithSupabase(schoolCode, username, password) {
+    const errorEl = document.getElementById('login-error');
+    
+    try {
+        const result = await authenticateUser(schoolCode, username, password);
+        
+        if (!result.success) {
+            errorEl.textContent = result.error || 'Authentication failed';
+            errorEl.classList.remove('hidden');
+            return;
+        }
+
+        const user = result.user;
+        APP_STATE.currentUser = { username, school_code: schoolCode, ...user };
+        APP_STATE.currentSchool = { code: schoolCode, school_name: 'School from DB' };
+        APP_STATE.currentRole = user.role;
+
+        // Audit log
+        await auditLog(schoolCode, username, 'LOGIN', 'auth', 'User logged in');
+
+        document.getElementById('login-step-1').classList.add('hidden');
+        document.getElementById('login-step-2').classList.remove('hidden');
+    } catch (error) {
+        errorEl.textContent = 'Authentication error: ' + error.message;
+        errorEl.classList.remove('hidden');
+    }
+}
+
+function completeLogin() {
+    APP_STATE.isAuthenticated = true;
+    document.getElementById('login-screen').classList.add('hidden');
+    document.getElementById('main-app').classList.remove('hidden');
+    document.getElementById('main-app').classList.add('flex');
+    initMainApp();
+    showToast('Welcome back, ' + APP_STATE.currentUser.name + '!', 'success');
+    if (APP_STATE.currentRole === 'admin') {
+        loadUsersFromDatabase();
+    }
+}
+
+function handleLogout() {
+    APP_STATE.isAuthenticated = false;
+    APP_STATE.currentUser = null;
+    APP_STATE.allUsers = [];
+    document.getElementById('main-app').classList.add('hidden');
+    document.getElementById('main-app').classList.remove('flex');
+    document.getElementById('login-screen').classList.remove('hidden');
+    document.getElementById('login-step-1').classList.remove('hidden');
+    document.getElementById('login-step-2').classList.add('hidden');
+    document.getElementById('login-password').value = '';
+}
+
+// ============================================
+// MAIN APP INITIALIZATION
+// ============================================
+
+function initMainApp() {
+    document.getElementById('school-name-display').textContent = APP_STATE.currentSchool.school_name;
+    document.getElementById('user-role-badge').textContent = APP_STATE.currentRole;
+    document.getElementById('user-name-display').textContent = APP_STATE.currentUser.name;
+    document.getElementById('user-email-display').textContent = APP_STATE.currentUser.email;
+    
+    // Load installed apps for this user
+    loadUserInstalledApps();
+    
+    renderSidebar();
+    navigateTo('dashboard');
+}
+
+function loadUserInstalledApps() {
+    // Get installed apps from localStorage for this user
+    const key = `apps_${APP_STATE.currentSchool.code}_${APP_STATE.currentUser.username}`;
+    const installed = localStorage.getItem(key);
+    APP_STATE.userInstalledApps = installed ? JSON.parse(installed) : [];
+    
+    // Dynamically add installed apps to sidebar
+    updateSidebarWithInstalledApps();
+}
+
+function updateSidebarWithInstalledApps() {
+    const roleModules = MODULES[APP_STATE.currentRole] || MODULES.admin;
+    
+    // Add installed apps to the modules (before settings if exists, or at the end)
+    const settingsIndex = roleModules.findIndex(m => m.id === 'settings');
+    const insertIndex = settingsIndex !== -1 ? settingsIndex : roleModules.length;
+    
+    // Remove any previously added apps
+    MODULES[APP_STATE.currentRole] = MODULES[APP_STATE.currentRole].filter(m => !m.isApp);
+    
+    // Add installed apps
+    APP_STATE.userInstalledApps.forEach((app, idx) => {
+        const appModule = AVAILABLE_APPS.find(a => a.id === app.app_id);
+        if (appModule) {
+            const appItem = {
+                id: `app_${app.app_id}`,
+                icon: 'grid', // or use app-specific icon
+                label: appModule.name,
+                isApp: true
+            };
+            MODULES[APP_STATE.currentRole].splice(insertIndex + idx, 0, appItem);
+        }
+    });
+}
+
+function handleAppAction(appId, isInstalled, e) {
+    e.preventDefault();
+    
+    if (isInstalled) {
+        // Remove app
+        const key = `apps_${APP_STATE.currentSchool.code}_${APP_STATE.currentUser.username}`;
+        APP_STATE.userInstalledApps = APP_STATE.userInstalledApps.filter(a => a.app_id !== appId);
+        localStorage.setItem(key, JSON.stringify(APP_STATE.userInstalledApps));
+        showToast(`App removed successfully`, 'success');
+    } else {
+        // Install app
+        const app = AVAILABLE_APPS.find(a => a.id === appId);
+        if (APP_STATE.userInstalledApps.length >= 10) {
+            showToast('Maximum 10 apps installed. Remove an app first.', 'error');
+            return;
+        }
+        
+        const newApp = {
+            app_id: appId,
+            app_name: app.name,
+            installed_at: new Date().toISOString(),
+            enabled: true
+        };
+        
+        APP_STATE.userInstalledApps.push(newApp);
+        const key = `apps_${APP_STATE.currentSchool.code}_${APP_STATE.currentUser.username}`;
+        localStorage.setItem(key, JSON.stringify(APP_STATE.userInstalledApps));
+        showToast(`${app.name} installed successfully!`, 'success');
+    }
+    
+    // Refresh the app store view
+    navigateTo('app-store');
+    updateSidebarWithInstalledApps();
+    renderSidebar();
+}
+
+function toggleAppGlobal(appId, isEnabled) {
+    const enabledAppsKey = `apps_enabled_${APP_STATE.currentSchool.code}`;
+    let enabledApps = JSON.parse(localStorage.getItem(enabledAppsKey) || '[]');
+    
+    if (isEnabled) {
+        if (!enabledApps.includes(appId)) {
+            enabledApps.push(appId);
+        }
+        showToast('App enabled globally', 'success');
+    } else {
+        enabledApps = enabledApps.filter(id => id !== appId);
+        showToast('App disabled globally', 'success');
+    }
+    
+    localStorage.setItem(enabledAppsKey, JSON.stringify(enabledApps));
+    // Refresh the view
+    navigateTo('app-management');
+}
+
+function renderSidebar() {
+    const nav = document.getElementById('sidebar-nav');
+    const modules = MODULES[APP_STATE.currentRole] || MODULES.admin;
+    nav.innerHTML = modules.map(m => `
+        <button class="sidebar-item w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm text-gray-600 font-medium ${APP_STATE.currentModule === m.id ? 'active' : ''}" data-module="${m.id}">
+            <i data-lucide="${m.icon}" class="w-[18px] h-[18px]"></i>
+            <span>${m.label}</span>
+        </button>
+    `).join('');
+
+    nav.querySelectorAll('.sidebar-item').forEach(btn => {
+        btn.addEventListener('click', () => navigateTo(btn.dataset.module));
+    });
+    lucide.createIcons();
+}
+
+function navigateTo(moduleId) {
+    APP_STATE.currentModule = moduleId;
+    renderSidebar();
+    const content = document.getElementById('page-content');
+    const titleEl = document.getElementById('page-title');
+    const breadcrumb = document.getElementById('page-breadcrumb');
+
+    const mod = (MODULES[APP_STATE.currentRole] || MODULES.admin).find(m => m.id === moduleId);
+    titleEl.textContent = mod ? mod.label : 'Dashboard';
+    breadcrumb.textContent = APP_STATE.currentSchool.school_name + ' • ' + APP_STATE.currentRole;
+
+    content.innerHTML = '<div class="fade-in">' + getModuleContent(moduleId) + '</div>';
+    lucide.createIcons();
+    initModuleInteractions(moduleId);
+}
+
+// ============================================
+// MODULE CONTENT RENDERERS
+// ============================================
+
+function getModuleContent(moduleId) {
+    switch(moduleId) {
+        case 'dashboard': return getDashboardContent();
+        case 'app-management': return getAppManagementContent();
+        case 'admin-users': return getAdminUsersContent();
+        case 'students': return getStudentsContent();
+        case 'teachers': return getTeachersContent();
+        case 'academic': return getAcademicContent();
+        case 'finance': return getFinanceContent();
+        case 'notifications': return getNotificationsContent();
+        case 'settings': return getSettingsContent();
+        case 'reports': return getReportsContent();
+        default: return getGenericModule(moduleId);
+    }
+}
+
+function getDashboardContent() {
+    const stats = APP_STATE.currentRole === 'admin' ? [
+        { label:'Total Students', value:'1,247', icon:'users', color:'blue', change:'+12%' },
+        { label:'Teachers', value:'86', icon:'briefcase', color:'emerald', change:'+3' },
+        { label:'Attendance Today', value:'94.2%', icon:'check-circle', color:'violet', change:'+1.2%' },
+        { label:'Revenue (Month)', value:'$142K', icon:'wallet', color:'amber', change:'+8%' }
+    ] : APP_STATE.currentRole === 'teacher' ? [
+        { label:'My Classes', value:'5', icon:'book-open', color:'blue', change:'' },
+        { label:'Students', value:'164', icon:'users', color:'emerald', change:'' },
+        { label:'Pending Grades', value:'23', icon:'file-text', color:'amber', change:'Due Fri' },
+        { label:'Attendance', value:'96%', icon:'check-circle', color:'violet', change:'' }
+    ] : [
+        { label:'GPA', value:'3.82', icon:'award', color:'blue', change:'+0.1' },
+        { label:'Attendance', value:'97%', icon:'check-circle', color:'emerald', change:'' },
+        { label:'Courses', value:'6', icon:'book-open', color:'violet', change:'' },
+        { label:'Assignments', value:'3', icon:'file-text', color:'amber', change:'Due soon' }
+    ];
+
+    const colorMap = { blue:'from-blue-500 to-blue-600', emerald:'from-emerald-500 to-emerald-600', violet:'from-violet-500 to-violet-600', amber:'from-amber-500 to-amber-600' };
+
+    return `
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            ${stats.map(s => `
+                <div class="bg-white rounded-2xl p-5 border border-surface-200 card-hover">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="w-10 h-10 bg-gradient-to-br ${colorMap[s.color]} rounded-xl flex items-center justify-center shadow-lg">
+                            <i data-lucide="${s.icon}" class="w-5 h-5 text-white"></i>
+                        </div>
+                        ${s.change ? `<span class="text-xs font-medium text-green-600 bg-green-50 px-2 py-0.5 rounded-full">${s.change}</span>` : ''}
+                    </div>
+                    <p class="text-2xl font-bold text-gray-800">${s.value}</p>
+                    <p class="text-xs text-gray-500 mt-0.5">${s.label}</p>
+                </div>
+            `).join('')}
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <!-- Recent Activity -->
+            <div class="lg:col-span-2 bg-white rounded-2xl border border-surface-200 p-5">
+                <h3 class="font-semibold text-gray-800 mb-4 flex items-center gap-2"><i data-lucide="activity" class="w-4 h-4 text-brand-500"></i> Recent Activity</h3>
+                <div class="space-y-3">
+                    ${[
+                        { text:'New student enrollment: Aisha Rahman', time:'2 min ago', dot:'bg-green-400' },
+                        { text:'Grade report submitted by Mr. Chen', time:'15 min ago', dot:'bg-blue-400' },
+                        { text:'Payment received: $2,400 - Tuition Fee', time:'1 hr ago', dot:'bg-amber-400' },
+                        { text:'Attendance marked for Grade 10-A', time:'2 hrs ago', dot:'bg-violet-400' },
+                        { text:'New announcement posted: Sports Day', time:'3 hrs ago', dot:'bg-pink-400' }
+                    ].map(a => `
+                        <div class="flex items-center gap-3 p-3 rounded-xl hover:bg-surface-50 transition">
+                            <span class="w-2 h-2 ${a.dot} rounded-full shrink-0"></span>
+                            <p class="text-sm text-gray-700 flex-1">${a.text}</p>
+                            <span class="text-[10px] text-gray-400 shrink-0">${a.time}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="bg-white rounded-2xl border border-surface-200 p-5">
+                <h3 class="font-semibold text-gray-800 mb-4 flex items-center gap-2"><i data-lucide="zap" class="w-4 h-4 text-amber-500"></i> Quick Actions</h3>
+                <div class="space-y-2">
+                    ${[
+                        { label:'Add Student', icon:'user-plus', color:'bg-blue-50 text-blue-600' },
+                        { label:'Mark Attendance', icon:'check-square', color:'bg-green-50 text-green-600' },
+                        { label:'Send Notification', icon:'send', color:'bg-violet-50 text-violet-600' },
+                        { label:'Generate Report', icon:'file-text', color:'bg-amber-50 text-amber-600' },
+                        { label:'Record Payment', icon:'credit-card', color:'bg-pink-50 text-pink-600' }
+                    ].map(a => `
+                        <button class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-surface-50 transition text-left">
+                            <div class="w-9 h-9 ${a.color} rounded-lg flex items-center justify-center">
+                                <i data-lucide="${a.icon}" class="w-4 h-4"></i>
+                            </div>
+                            <span class="text-sm font-medium text-gray-700">${a.label}</span>
+                        </button>
+                    `).join('')}
+                </div>
+            </div>
+        </div>
+
+        <!-- Upcoming Events -->
+        <div class="mt-4 bg-white rounded-2xl border border-surface-200 p-5">
+            <h3 class="font-semibold text-gray-800 mb-4 flex items-center gap-2"><i data-lucide="calendar" class="w-4 h-4 text-brand-500"></i> Upcoming Schedule</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                ${[
+                    { title:'Parent-Teacher Meeting', date:'Jan 15, 2025', time:'10:00 AM', color:'border-l-blue-500' },
+                    { title:'Annual Sports Day', date:'Jan 22, 2025', time:'8:00 AM', color:'border-l-emerald-500' },
+                    { title:'Science Fair', date:'Feb 3, 2025', time:'9:00 AM', color:'border-l-violet-500' }
+                ].map(e => `
+                    <div class="border-l-4 ${e.color} bg-surface-50 rounded-r-xl p-4">
+                        <p class="text-sm font-semibold text-gray-800">${e.title}</p>
+                        <p class="text-xs text-gray-500 mt-1"><i data-lucide="calendar" class="w-3 h-3 inline mr-1"></i>${e.date}</p>
+                        <p class="text-xs text-gray-400"><i data-lucide="clock" class="w-3 h-3 inline mr-1"></i>${e.time}</p>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    `;
+}
+
+
+
+function getAppManagementContent() {
+    const enabledAppsKey = `apps_enabled_${APP_STATE.currentSchool.code}`;
+    const enabledApps = JSON.parse(localStorage.getItem(enabledAppsKey) || '[]');
+    
+    return `
+        <div class="mb-6">
+            <h2 class="text-xl font-bold text-gray-800 mb-1">App Management</h2>
+            <p class="text-sm text-gray-500">Enable or disable apps globally for all users</p>
+        </div>
+
+        <div class="space-y-3">
+            ${AVAILABLE_APPS.map(app => {
+                const isEnabled = enabledApps.includes(app.id);
+                const rolesText = Object.keys(app.permissions).filter(r => Object.values(app.permissions[r]).some(v => v)).join(', ');
+                return `
+                    <div class="bg-white rounded-2xl border border-surface-200 p-5 flex items-start justify-between">
+                        <div class="flex items-start gap-4 flex-1">
+                            <div class="text-3xl">${app.icon}</div>
+                            <div class="flex-1">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <h3 class="font-semibold text-gray-800">${app.name}</h3>
+                                    <span class="text-xs font-medium bg-surface-100 text-gray-600 px-2 py-0.5 rounded-full">${app.category}</span>
+                                    ${isEnabled ? `<span class="text-xs font-medium bg-green-100 text-green-700 px-2 py-0.5 rounded-full">Enabled</span>` : `<span class="text-xs font-medium bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">Disabled</span>`}
+                                </div>
+                                <p class="text-sm text-gray-600 mb-2">${app.description}</p>
+                                <div class="flex flex-wrap gap-2 items-center">
+                                    <p class="text-xs text-gray-500">Available for roles:</p>
+                                    <div class="flex flex-wrap gap-1.5">
+                                        ${Object.entries(app.permissions).map(([role, perms]) => {
+                                            const hasPerms = Object.values(perms).some(v => v);
+                                            return hasPerms ? `<span class="text-xs bg-brand-50 text-brand-700 px-2.5 py-1 rounded-full capitalize font-medium">${role}</span>` : '';
+                                        }).join('')}
+                                    </div>
+                                </div>
+                                <div class="mt-2 bg-blue-50 rounded-lg p-2.5">
+                                    <p class="text-xs font-semibold text-blue-700 mb-1">Permissions by role:</p>
+                                    <div class="space-y-1">
+                                        ${Object.entries(app.permissions).map(([role, perms]) => {
+                                            const hasPerms = Object.values(perms).some(v => v);
+                                            return hasPerms ? `
+                                                <div class="text-xs text-blue-600">
+                                                    <span class="font-medium capitalize">${role}:</span>
+                                                    ${Object.entries(perms).filter(([,v]) => v).map(([p]) => `<span class="inline-block mx-1">${p.replace(/([A-Z])/g, ' $1').trim()}</span>`).join(', ')}
+                                                </div>
+                                            ` : '';
+                                        }).join('')}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <label class="flex items-center gap-3 ml-4 cursor-pointer">
+                            <input type="checkbox" ${isEnabled ? 'checked' : ''} onchange="toggleAppGlobal('${app.id}', this.checked)" class="w-5 h-5 rounded accent-brand-600">
+                            <span class="text-sm font-medium text-gray-600">${isEnabled ? 'Enabled' : 'Disabled'}</span>
+                        </label>
+                    </div>
+                `;
+            }).join('')}
+        </div>
+    `;
+}
+
+function getStudentsContent() {
+    const students = [
+        { id:'STU001', name:'Emma Wilson', grade:'10-A', gpa:'3.9', status:'Active', avatar:'E' },
+        { id:'STU002', name:'Liam Parker', grade:'10-B', gpa:'3.7', status:'Active', avatar:'L' },
+        { id:'STU003', name:'Aisha Rahman', grade:'9-A', gpa:'3.85', status:'Active', avatar:'A' },
+        { id:'STU004', name:'Carlos Mendez', grade:'11-A', gpa:'3.6', status:'Active', avatar:'C' },
+        { id:'STU005', name:'Yuki Tanaka', grade:'10-A', gpa:'3.92', status:'Active', avatar:'Y' }
+    ];
+    return `
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-5">
+            <div class="flex items-center gap-2">
+                <div class="relative">
+                    <i data-lucide="search" class="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
+                    <input type="text" placeholder="Search students..." class="pl-9 pr-4 py-2.5 bg-white border border-surface-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-200 w-64">
+                </div>
+                <select class="px-3 py-2.5 bg-white border border-surface-200 rounded-xl text-sm text-gray-600 focus:outline-none">
+                    <option>All Grades</option><option>Grade 9</option><option>Grade 10</option><option>Grade 11</option>
+                </select>
+            </div>
+            <button class="px-4 py-2.5 bg-brand-600 hover:bg-brand-700 text-white text-sm font-medium rounded-xl flex items-center gap-2 transition shadow-md shadow-brand-200">
+                <i data-lucide="user-plus" class="w-4 h-4"></i> Add Student
+            </button>
+        </div>
+        <div class="bg-white rounded-2xl border border-surface-200 overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-surface-50">
+                        <tr>
+                            <th class="text-left text-xs font-semibold text-gray-500 uppercase px-5 py-3">Student</th>
+                            <th class="text-left text-xs font-semibold text-gray-500 uppercase px-5 py-3">ID</th>
+                            <th class="text-left text-xs font-semibold text-gray-500 uppercase px-5 py-3">Grade</th>
+                            <th class="text-left text-xs font-semibold text-gray-500 uppercase px-5 py-3">GPA</th>
+                            <th class="text-left text-xs font-semibold text-gray-500 uppercase px-5 py-3">Status</th>
+                            <th class="text-right text-xs font-semibold text-gray-500 uppercase px-5 py-3">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-surface-100">
+                        ${students.map(s => `
+                            <tr class="hover:bg-surface-50 transition">
+                                <td class="px-5 py-4"><div class="flex items-center gap-3"><div class="w-9 h-9 bg-brand-100 text-brand-700 rounded-full flex items-center justify-center text-sm font-bold">${s.avatar}</div><span class="text-sm font-medium text-gray-800">${s.name}</span></div></td>
+                                <td class="px-5 py-4 text-sm text-gray-500">${s.id}</td>
+                                <td class="px-5 py-4 text-sm text-gray-600">${s.grade}</td>
+                                <td class="px-5 py-4 text-sm font-semibold text-gray-800">${s.gpa}</td>
+                                <td class="px-5 py-4"><span class="text-xs font-medium bg-green-50 text-green-700 px-2.5 py-1 rounded-full">${s.status}</span></td>
+                                <td class="px-5 py-4 text-right"><button class="p-1.5 hover:bg-surface-100 rounded-lg"><i data-lucide="more-horizontal" class="w-4 h-4 text-gray-400"></i></button></td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
+            <div class="flex items-center justify-between px-5 py-3 border-t border-surface-100">
+                <span class="text-xs text-gray-500">Showing 1-5 of 1,247 students</span>
+                <div class="flex gap-1">
+                    <button class="px-3 py-1.5 text-xs bg-brand-600 text-white rounded-lg">1</button>
+                    <button class="px-3 py-1.5 text-xs text-gray-600 hover:bg-surface-100 rounded-lg">2</button>
+                    <button class="px-3 py-1.5 text-xs text-gray-600 hover:bg-surface-100 rounded-lg">3</button>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function getTeachersContent() {
+    const teachers = [
+        { name:'Michael Chen', subject:'Mathematics', classes:5, students:164, status:'Active' },
+        { name:'Patricia Gomez', subject:'English Literature', classes:4, students:132, status:'Active' },
+        { name:'Ahmed Hassan', subject:'Physics', classes:3, students:96, status:'Active' },
+        { name:'Lisa Park', subject:'Biology', classes:4, students:128, status:'On Leave' }
+    ];
+    return `
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            ${teachers.map(t => `
+                <div class="bg-white rounded-2xl border border-surface-200 p-5 card-hover">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-brand-400 to-brand-600 rounded-xl flex items-center justify-center text-white font-bold">${t.name[0]}</div>
+                        <div><p class="text-sm font-semibold text-gray-800">${t.name}</p><p class="text-xs text-gray-500">${t.subject}</p></div>
+                    </div>
+                    <div class="flex justify-between text-center border-t border-surface-100 pt-3">
+                        <div><p class="text-lg font-bold text-gray-800">${t.classes}</p><p class="text-[10px] text-gray-400">Classes</p></div>
+                        <div><p class="text-lg font-bold text-gray-800">${t.students}</p><p class="text-[10px] text-gray-400">Students</p></div>
+                        <div><span class="text-xs font-medium ${t.status==='Active'?'bg-green-50 text-green-700':'bg-amber-50 text-amber-700'} px-2 py-0.5 rounded-full">${t.status}</span></div>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+    `;
+}
+
+function getAcademicContent() {
+    return `
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5">
+            <div class="bg-white rounded-2xl border border-surface-200 p-5 card-hover">
+                <div class="flex items-center gap-3 mb-2"><div class="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center"><i data-lucide="calendar" class="w-5 h-5 text-blue-600"></i></div><span class="text-sm font-semibold text-gray-700">Academic Year</span></div>
+                <p class="text-xl font-bold text-gray-800">2024-2025</p><p class="text-xs text-gray-500">Semester 2 in progress</p>
+            </div>
+            <div class="bg-white rounded-2xl border border-surface-200 p-5 card-hover">
+                <div class="flex items-center gap-3 mb-2"><div class="w-10 h-10 bg-emerald-50 rounded-xl flex items-center justify-center"><i data-lucide="book-open" class="w-5 h-5 text-emerald-600"></i></div><span class="text-sm font-semibold text-gray-700">Total Subjects</span></div>
+                <p class="text-xl font-bold text-gray-800">32</p><p class="text-xs text-gray-500">Across all grades</p>
+            </div>
+            <div class="bg-white rounded-2xl border border-surface-200 p-5 card-hover">
+                <div class="flex items-center gap-3 mb-2"><div class="w-10 h-10 bg-violet-50 rounded-xl flex items-center justify-center"><i data-lucide="layout-grid" class="w-5 h-5 text-violet-600"></i></div><span class="text-sm font-semibold text-gray-700">Classrooms</span></div>
+                <p class="text-xl font-bold text-gray-800">48</p><p class="text-xs text-gray-500">18 sections active</p>
+            </div>
+        </div>
+        <div class="bg-white rounded-2xl border border-surface-200 p-5">
+            <h3 class="font-semibold text-gray-800 mb-4">Class Schedule - Today</h3>
+            <div class="space-y-2">
+                ${[
+                    { time:'08:00 - 08:45', subject:'Mathematics', teacher:'Mr. Chen', room:'Room 201', color:'bg-blue-100 text-blue-700' },
+                    { time:'09:00 - 09:45', subject:'English Literature', teacher:'Ms. Gomez', room:'Room 105', color:'bg-emerald-100 text-emerald-700' },
+                    { time:'10:00 - 10:45', subject:'Physics', teacher:'Mr. Hassan', room:'Lab 3', color:'bg-violet-100 text-violet-700' },
+                    { time:'11:00 - 11:45', subject:'Biology', teacher:'Ms. Park', room:'Lab 1', color:'bg-pink-100 text-pink-700' }
+                ].map(c => `
+                    <div class="flex items-center gap-4 p-3 rounded-xl hover:bg-surface-50 transition">
+                        <span class="text-xs font-mono text-gray-500 w-28 shrink-0">${c.time}</span>
+                        <span class="text-xs font-semibold ${c.color} px-2.5 py-1 rounded-lg">${c.subject}</span>
+                        <span class="text-xs text-gray-600 flex-1">${c.teacher}</span>
+                        <span class="text-xs text-gray-400">${c.room}</span>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    `;
+}
+
+function getFinanceContent() {
+    return `
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5">
+            <div class="bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl p-5 text-white shadow-lg shadow-emerald-200">
+                <p class="text-sm opacity-80">Total Revenue</p><p class="text-2xl font-bold mt-1">$1,420,000</p><p class="text-xs opacity-70 mt-1">This academic year</p>
+            </div>
+            <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-5 text-white shadow-lg shadow-blue-200">
+                <p class="text-sm opacity-80">Collected</p><p class="text-2xl font-bold mt-1">$1,180,000</p><p class="text-xs opacity-70 mt-1">83% collection rate</p>
+            </div>
+            <div class="bg-gradient-to-br from-amber-500 to-amber-600 rounded-2xl p-5 text-white shadow-lg shadow-amber-200">
+                <p class="text-sm opacity-80">Pending</p><p class="text-2xl font-bold mt-1">$240,000</p><p class="text-xs opacity-70 mt-1">142 invoices outstanding</p>
+            </div>
+        </div>
+        <div class="bg-white rounded-2xl border border-surface-200 p-5">
+            <h3 class="font-semibold text-gray-800 mb-4">Recent Transactions</h3>
+            <div class="space-y-2">
+                ${[
+                    { name:'Emma Wilson', type:'Tuition Fee', amount:'+$2,400', date:'Jan 10', status:'Paid' },
+                    { name:'Liam Parker', type:'Library Fee', amount:'+$150', date:'Jan 9', status:'Paid' },
+                    { name:'Carlos Mendez', type:'Tuition Fee', amount:'$2,400', date:'Jan 8', status:'Pending' },
+                    { name:'Yuki Tanaka', type:'Activity Fee', amount:'+$350', date:'Jan 7', status:'Paid' }
+                ].map(t => `
+                    <div class="flex items-center justify-between p-3 rounded-xl hover:bg-surface-50 transition">
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 bg-surface-100 rounded-full flex items-center justify-center text-xs font-bold text-gray-600">${t.name[0]}</div>
+                            <div><p class="text-sm font-medium text-gray-800">${t.name}</p><p class="text-xs text-gray-400">${t.type}</p></div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-sm font-semibold ${t.status==='Paid'?'text-green-600':'text-amber-600'}">${t.amount}</p>
+                            <p class="text-[10px] text-gray-400">${t.date}</p>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    `;
+}
+
+function getNotificationsContent() {
+    return `
+        <div class="space-y-3">
+            ${[
+                { title:'Sports Day Registration Open', body:'Register your child for the annual sports day event by Jan 20.', time:'10 min ago', icon:'trophy', color:'bg-amber-50 text-amber-600', unread:true },
+                { title:'Grade Report Available', body:'Semester 1 grades have been published. View your child\'s report.', time:'2 hrs ago', icon:'file-text', color:'bg-blue-50 text-blue-600', unread:true },
+                { title:'Payment Reminder', body:'Tuition fee for February is due by Jan 25.', time:'1 day ago', icon:'wallet', color:'bg-red-50 text-red-600', unread:false },
+                { title:'School Closed - Public Holiday', body:'School will be closed on Jan 26 for Republic Day.', time:'2 days ago', icon:'calendar', color:'bg-violet-50 text-violet-600', unread:false }
+            ].map(n => `
+                <div class="bg-white rounded-2xl border ${n.unread?'border-brand-200 bg-brand-50/30':'border-surface-200'} p-5 card-hover">
+                    <div class="flex gap-4">
+                        <div class="w-10 h-10 ${n.color} rounded-xl flex items-center justify-center shrink-0"><i data-lucide="${n.icon}" class="w-5 h-5"></i></div>
+                        <div class="flex-1">
+                            <div class="flex items-start justify-between">
+                                <h4 class="text-sm font-semibold text-gray-800">${n.title}</h4>
+                                <span class="text-[10px] text-gray-400 shrink-0">${n.time}</span>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">${n.body}</p>
+                        </div>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+    `;
+}
+
+function getSettingsContent() {
+    return `
+        <div class="max-w-2xl">
+            <div class="bg-white rounded-2xl border border-surface-200 p-6 mb-4">
+                <h3 class="font-semibold text-gray-800 mb-4">School Settings</h3>
+                <div class="space-y-4">
+                    <div><label class="block text-xs font-medium text-gray-500 mb-1">School Name</label><input type="text" value="${APP_STATE.currentSchool.school_name}" class="w-full px-4 py-2.5 bg-surface-50 border border-surface-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-200"></div>
+                    <div><label class="block text-xs font-medium text-gray-500 mb-1">School Code</label><input type="text" value="${APP_STATE.currentSchool.code}" class="w-full px-4 py-2.5 bg-surface-50 border border-surface-200 rounded-xl text-sm" disabled></div>
+                    <div><label class="block text-xs font-medium text-gray-500 mb-1">Theme Color</label><input type="color" value="${APP_STATE.currentSchool.theme_color}" class="w-12 h-10 rounded-lg cursor-pointer border-0"></div>
+                    <button class="px-5 py-2.5 bg-brand-600 hover:bg-brand-700 text-white text-sm font-medium rounded-xl transition">Save Changes</button>
+                </div>
+            </div>
+            <div class="bg-white rounded-2xl border border-surface-200 p-6">
+                <h3 class="font-semibold text-gray-800 mb-4">Module Management</h3>
+                <div class="space-y-2">
+                    ${['Dashboard','Academic','Finance','Notifications','Reports','Alumni','Library'].map(m => `
+                        <label class="flex items-center justify-between p-3 rounded-xl hover:bg-surface-50 cursor-pointer">
+                            <span class="text-sm text-gray-700">${m}</span>
+                            <input type="checkbox" checked class="w-4 h-4 accent-brand-600 rounded">
+                        </label>
+                    `).join('')}
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function getReportsContent() {
+    return `
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            ${[
+                { title:'Enrollment Report', desc:'Student enrollment statistics by grade and section', icon:'users', color:'bg-blue-50 text-blue-600' },
+                { title:'Attendance Report', desc:'Daily, weekly, monthly attendance analytics', icon:'check-circle', color:'bg-emerald-50 text-emerald-600' },
+                { title:'Financial Report', desc:'Revenue, expenses, and collection status', icon:'wallet', color:'bg-amber-50 text-amber-600' },
+                { title:'Academic Performance', desc:'GPA distribution, pass rates, top performers', icon:'award', color:'bg-violet-50 text-violet-600' }
+            ].map(r => `
+                <div class="bg-white rounded-2xl border border-surface-200 p-5 card-hover cursor-pointer">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 ${r.color} rounded-xl flex items-center justify-center shrink-0"><i data-lucide="${r.icon}" class="w-6 h-6"></i></div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-gray-800">${r.title}</h4>
+                            <p class="text-xs text-gray-500 mt-1">${r.desc}</p>
+                            <button class="mt-3 text-xs font-medium text-brand-600 flex items-center gap-1"><i data-lucide="download" class="w-3 h-3"></i> Generate</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+    `;
+}
+
+function getGenericModule(id) {
+    const title = id.replace(/-/g,' ').replace(/\b\w/g,l=>l.toUpperCase());
+    return `
+        <div class="bg-white rounded-2xl border border-surface-200 p-8 text-center">
+            <div class="w-16 h-16 bg-surface-100 rounded-2xl flex items-center justify-center mx-auto mb-4"><i data-lucide="construction" class="w-8 h-8 text-gray-400"></i></div>
+            <h3 class="text-lg font-semibold text-gray-700">${title}</h3>
+            <p class="text-sm text-gray-500 mt-2">This module is ready for configuration.<br>Connect to Supabase to enable full functionality.</p>
+        </div>
+    `;
+}
+
+function getDashboardContent() {
+</script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9fd352bf46b345c3',t:'MTc3OTAyODI2MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
