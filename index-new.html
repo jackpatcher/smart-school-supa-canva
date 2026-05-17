@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="th" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>แพลตฟอร์มโรงเรียนอัจฉริยะ</title>
+  
+  <!-- External Libraries -->
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { 
+            jakarta: ['Plus Jakarta Sans', 'sans-serif'] 
+          },
+          colors: {
+            brand: { 
+              50: '#eff6ff', 100: '#dbeafe', 200: '#bfdbfe', 300: '#93c5fd', 
+              400: '#60a5fa', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8' 
+            },
+            surface: { 
+              50: '#f8fafc', 100: '#f1f5f9', 200: '#e2e8f0' 
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Local Styles -->
+  <link rel="stylesheet" href="./src/css/styles.css">
+</head>
+<body class="h-full bg-surface-50 font-jakarta">
+  <div id="app" class="h-full w-full">
+    
+    <!-- SPLASH SCREEN - ONBOARDING CAROUSEL -->
+    <div id="splash-screen" class="h-full w-full bg-gradient-to-br from-brand-600 via-brand-500 to-blue-600 flex flex-col items-center justify-center p-4">
+      <div class="w-full max-w-md mx-auto flex flex-col items-center justify-between h-full py-8">
+        <!-- Carousel Content -->
+        <div class="flex-1 flex flex-col items-center justify-center text-center">
+          <div id="slide-1" class="splash-slide w-full fade-in">
+            <div class="w-20 h-20 bg-white bg-opacity-20 rounded-3xl flex items-center justify-center mx-auto mb-6 backdrop-blur-sm">
+              <i data-lucide="graduation-cap" class="w-10 h-10 text-white"></i>
+            </div>
+            <h2 class="text-3xl font-bold text-white mb-3">แพลตฟอร์มโรงเรียนอัจฉริยะ</h2>
+            <p class="text-white text-opacity-90 text-sm leading-relaxed">ระบบจัดการโรงเรียนแบบครบครัน<br>จัดการทุกด้านของโรงเรียนของคุณได้อย่างราบรื่น</p>
+          </div>
+          <div id="slide-2" class="splash-slide w-full fade-in hidden">
+            <div class="w-20 h-20 bg-white bg-opacity-20 rounded-3xl flex items-center justify-center mx-auto mb-6 backdrop-blur-sm">
+              <i data-lucide="users" class="w-10 h-10 text-white"></i>
+            </div>
+            <h2 class="text-3xl font-bold text-white mb-3">สถาปัตยกรรมแบบหลายผู้เช่า</h2>
+            <p class="text-white text-opacity-90 text-sm leading-relaxed">สนับสนุนโรงเรียนหลายแห่งพร้อมการแยกข้อมูลที่สมบูรณ์<br>ปลอดภัย ปรับขนาดได้ และพร้อมใช้สำหรับองค์กร</p>
+          </div>
+          <div id="slide-3" class="splash-slide w-full fade-in hidden">
+            <div class="w-20 h-20 bg-white bg-opacity-20 rounded-3xl flex items-center justify-center mx-auto mb-6 backdrop-blur-sm">
+              <i data-lucide="zap" class="w-10 h-10 text-white"></i>
+            </div>
+            <h2 class="text-3xl font-bold text-white mb-3">แอป สโตร์ที่ทรงพลัง</h2>
+            <p class="text-white text-opacity-90 text-sm leading-relaxed">ขยายฟังก์ชันการทำงานด้วยแอปที่ติดตั้งได้<br>ปรับแต่งตามความต้องการเฉพาะของโรงเรียนของคุณ</p>
+          </div>
+        </div>
+
+        <!-- Slide Indicators -->
+        <div class="flex items-center gap-2 mb-6">
+          <div id="dot-1" class="splash-dot w-2.5 h-2.5 bg-white rounded-full transition-all duration-300"></div>
+          <div id="dot-2" class="splash-dot w-2 h-2 bg-white bg-opacity-40 rounded-full transition-all duration-300"></div>
+          <div id="dot-3" class="splash-dot w-2 h-2 bg-white bg-opacity-40 rounded-full transition-all duration-300"></div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="flex items-center gap-3 w-full">
+          <button id="btn-splash-prev" class="flex-1 px-4 py-3 bg-white bg-opacity-20 hover:bg-opacity-30 text-white font-medium rounded-xl backdrop-blur-sm transition flex items-center justify-center gap-2">
+            <i data-lucide="chevron-left" class="w-4 h-4"></i> ก่อนหน้า
+          </button>
+          <button id="btn-splash-next" class="flex-1 px-4 py-3 bg-white hover:bg-opacity-90 text-brand-600 font-medium rounded-xl transition flex items-center justify-center gap-2">
+            ถัดไป <i data-lucide="chevron-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+        <button id="btn-splash-skip" class="mt-3 w-full text-white text-opacity-70 hover:text-opacity-100 text-sm font-medium transition">
+          ข้ามไปที่แอป →
+        </button>
+      </div>
+    </div>
+
+    <!-- LANDING PAGE -->
+    <div id="landing-page" class="h-full w-full hidden flex flex-col bg-white overflow-y-auto">
+      <!-- Navigation Bar -->
+      <nav class="sticky top-0 z-40 bg-white border-b border-surface-200">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-brand-600 rounded-xl flex items-center justify-center shadow-md">
+              <i data-lucide="graduation-cap" class="w-5 h-5 text-white"></i>
+            </div>
+            <h1 id="landing-title" class="text-xl font-bold text-gray-800">แพลตฟอร์มโรงเรียนอัจฉริยะ</h1>
+          </div>
+          <button id="btn-landing-login" class="px-6 py-2.5 bg-brand-600 hover:bg-brand-700 text-white text-sm font-medium rounded-xl transition shadow-md shadow-brand-200">
+            เข้าสู่ระบบ
+          </button>
+        </div>
+      </nav>
+
+      <!-- Hero Section -->
+      <section class="py-16 px-6 bg-gradient-to-br from-brand-50 via-white to-blue-50">
+        <div class="max-w-6xl mx-auto text-center">
+          <div class="inline-block mb-4 px-4 py-1.5 bg-brand-100 text-brand-700 rounded-full text-xs font-semibold">
+            ✨ เปลี่ยนแปลงการจัดการโรงเรียนของคุณ
+          </div>
+          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            โซลูชั่นการจัดการโรงเรียน<span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-blue-600">ที่สมบูรณ์</span>
+          </h2>
+          <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+            ปรับปรุงการดำเนินงาน เพิ่มประสิทธิภาพการสื่อสาร และเพิ่มศักยภาพให้ผู้สอนด้วยแพลตฟอร์มแบบครบครันของเราที่ออกแบบมาสำหรับโรงเรียนสมัยใหม่
+          </p>
+          <button id="btn-hero-getstarted" class="px-8 py-3.5 bg-brand-600 hover:bg-brand-700 text-white font-medium rounded-xl shadow-lg shadow-brand-200 transition transform hover:scale-105">
+            เริ่มต้นเลย
+          </button>
+        </div>
+      </section>
+
+      <!-- Features Grid (from old version) -->
+      <section class="py-16 px-6">
+        <div class="max-w-6xl mx-auto">
+          <h3 class="text-2xl font-bold text-gray-900 mb-3 text-center">คุณสมบัติหลัก</h3>
+          <p class="text-gray-600 text-center mb-12">ทุกสิ่งที่คุณต้องการเพื่อจัดการโรงเรียนของคุณได้อย่างมีประสิทธิภาพ</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-white rounded-2xl border border-surface-200 p-6 card-hover">
+              <div class="w-12 h-12 bg-brand-100 rounded-xl flex items-center justify-center mb-4"><i data-lucide="users" class="w-6 h-6 text-brand-600"></i></div>
+              <h4 class="text-lg font-semibold text-gray-800 mb-2">การจัดการนักเรียน</h4>
+              <p class="text-sm text-gray-600">บันทึกนักเรียน การลงทะเบียน และการจัดการโปรไฟล์ที่ครอบคลุม</p>
+            </div>
+            <div class="bg-white rounded-2xl border border-surface-200 p-6 card-hover">
+              <div class="w-12 h-12 bg-brand-100 rounded-xl flex items-center justify-center mb-4"><i data-lucide="briefcase" class="w-6 h-6 text-brand-600"></i></div>
+              <h4 class="text-lg font-semibold text-gray-800 mb-2">การจัดการครู</h4>
+              <p class="text-sm text-gray-600">จัดการข้อมูลครู งานมอบหมาย และประสิทธิภาพการทำงาน</p>
+            </div>
+            <div class="bg-white rounded-2xl border border-surface-200 p-6 card-hover">
+              <div class="w-12 h-12 bg-brand-100 rounded-xl flex items-center justify-center mb-4"><i data-lucide="book-open" class="w-6 h-6 text-brand-600"></i></div>
+              <h4 class="text-lg font-semibold text-gray-800 mb-2">การติดตามความก้าวหน้าทางการศึกษา</h4>
+              <p class="text-sm text-gray-600">ชั้นเรียน วิชา ตารางเวลา และความก้าวหน้าทางการศึกษา</p>
+            </div>
+            <div class="bg-white rounded-2xl border border-surface-200 p-6 card-hover">
+              <div class="w-12 h-12 bg-brand-100 rounded-xl flex items-center justify-center mb-4"><i data-lucide="wallet" class="w-6 h-6 text-brand-600"></i></div>
+              <h4 class="text-lg font-semibold text-gray-800 mb-2">การเงินและการเรียกเก็บเงิน</h4>
+              <p class="text-sm text-gray-600">การเก็บค่าเรียน การติดตามการชำระเงิน และรายงานทางการเงิน</p>
+            </div>
+            <div class="bg-white rounded-2xl border border-surface-200 p-6 card-hover">
+              <div class="w-12 h-12 bg-brand-100 rounded-xl flex items-center justify-center mb-4"><i data-lucide="calendar" class="w-6 h-6 text-brand-600"></i></div>
+              <h4 class="text-lg font-semibold text-gray-800 mb-2">ปฏิทินกิจกรรม</h4>
+              <p class="text-sm text-gray-600">วางแผนและจัดการกิจกรรมโรงเรียนและการประกาศณ์</p>
+            </div>
+            <div class="bg-white rounded-2xl border border-surface-200 p-6 card-hover">
+              <div class="w-12 h-12 bg-brand-100 rounded-xl flex items-center justify-center mb-4"><i data-lucide="zap" class="w-6 h-6 text-brand-600"></i></div>
+              <h4 class="text-lg font-semibold text-gray-800 mb-2">แอป สโตร์</h4>
+              <p class="text-sm text-gray-600">ขยายฟังก์ชันการทำงานด้วยแอปที่ติดตั้งได้และการรวมระบบ</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- User Roles Section -->
+      <section class="py-16 px-6 bg-surface-50">
+        <div class="max-w-6xl mx-auto">
+          <h3 class="text-2xl font-bold text-gray-900 mb-3 text-center">สร้างมาสำหรับทุกคน</h3>
+          <p class="text-gray-600 text-center mb-12">การเข้าถึงตามบทบาทสำหรับผู้มีส่วนได้ส่วนเสีย</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+            <div class="bg-white rounded-2xl border border-surface-200 p-5 text-center card-hover">
+              <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mx-auto mb-3"><i data-lucide="shield" class="w-6 h-6"></i></div>
+              <h4 class="font-semibold text-gray-800">ผู้ดูแลระบบ</h4>
+              <p class="text-xs text-gray-500 mt-1">การควบคุมระบบเต็มรูปแบบ</p>
+            </div>
+            <div class="bg-white rounded-2xl border border-surface-200 p-5 text-center card-hover">
+              <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center mx-auto mb-3"><i data-lucide="book-open" class="w-6 h-6"></i></div>
+              <h4 class="font-semibold text-gray-800">ครู</h4>
+              <p class="text-xs text-gray-500 mt-1">การจัดการชั้นเรียน</p>
+            </div>
+            <div class="bg-white rounded-2xl border border-surface-200 p-5 text-center card-hover">
+              <div class="w-12 h-12 bg-violet-50 text-violet-600 rounded-xl flex items-center justify-center mx-auto mb-3"><i data-lucide="graduation-cap" class="w-6 h-6"></i></div>
+              <h4 class="font-semibold text-gray-800">นักเรียน</h4>
+              <p class="text-xs text-gray-500 mt-1">การเข้าถึงงานวิชา</p>
+            </div>
+            <div class="bg-white rounded-2xl border border-surface-200 p-5 text-center card-hover">
+              <div class="w-12 h-12 bg-pink-50 text-pink-600 rounded-xl flex items-center justify-center mx-auto mb-3"><i data-lucide="users" class="w-6 h-6"></i></div>
+              <h4 class="font-semibold text-gray-800">พ่อแม่</h4>
+              <p class="text-xs text-gray-500 mt-1">การติดตามความก้าวหน้า</p>
+            </div>
+            <div class="bg-white rounded-2xl border border-surface-200 p-5 text-center card-hover">
+              <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center mx-auto mb-3"><i data-lucide="bar-chart-3" class="w-6 h-6"></i></div>
+              <h4 class="font-semibold text-gray-800">ผู้บริหาร</h4>
+              <p class="text-xs text-gray-500 mt-1">การวิเคราะห์และรายงาน</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stats Section -->
+      <section class="py-16 px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div class="text-center">
+              <p class="text-4xl font-bold text-brand-600 mb-1">10,000+</p>
+              <p class="text-gray-600">โรงเรียนทั่วโลก</p>
+            </div>
+            <div class="text-center">
+              <p class="text-4xl font-bold text-brand-600 mb-1">500K+</p>
+              <p class="text-gray-600">ผู้ใช้ที่ใช้งานอยู่</p>
+            </div>
+            <div class="text-center">
+              <p class="text-4xl font-bold text-brand-600 mb-1">99.9%</p>
+              <p class="text-gray-600">เวลาเปิดทำการ</p>
+            </div>
+            <div class="text-center">
+              <p class="text-4xl font-bold text-brand-600 mb-1">24/7</p>
+              <p class="text-gray-600">การสนับสนุน</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="py-16 px-6 bg-gradient-to-r from-brand-600 to-blue-600">
+        <div class="max-w-4xl mx-auto text-center">
+          <h3 class="text-3xl font-bold text-white mb-4">พร้อมเปลี่ยนแปลงโรงเรียนของคุณหรือไม่</h3>
+          <p class="text-white text-opacity-90 mb-8">เริ่มจัดการโรงเรียนของคุณได้อย่างมีประสิทธิภาพในวันนี้ เข้าสู่ระบบเพื่อเข้าถึงคุณสมบัติทั้งหมด</p>
+          <button id="btn-cta-login" class="px-8 py-3.5 bg-white hover:bg-opacity-90 text-brand-600 font-medium rounded-xl transition shadow-lg transform hover:scale-105">
+            เข้าสู่ระบบแดชบอร์ด
+          </button>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="bg-gray-900 text-white py-8 px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            <div>
+              <h4 class="font-semibold mb-3">รายละเอียด</h4>
+              <ul class="space-y-2 text-sm text-gray-400">
+                <li><a href="#" class="hover:text-white transition">คุณสมบัติ</a></li>
+                <li><a href="#" class="hover:text-white transition">เงิน</a></li>
+                <li><a href="#" class="hover:text-white transition">ความปลอดภัย</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold mb-3">บริษัท</h4>
+              <ul class="space-y-2 text-sm text-gray-400">
+                <li><a href="#" class="hover:text-white transition">เกี่ยวกับ</a></li>
+                <li><a href="#" class="hover:text-white transition">บล็อก</a></li>
+                <li><a href="#" class="hover:text-white transition">อาชีเร</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold mb-3">สนับสนุน</h4>
+              <ul class="space-y-2 text-sm text-gray-400">
+                <li><a href="#" class="hover:text-white transition">ศูนย์บาต</a></li>
+                <li><a href="#" class="hover:text-white transition">เอกสาร</a></li>
+                <li><a href="#" class="hover:text-white transition">ติดต่อ</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold mb-3">ทำตามเรา</h4>
+              <div class="flex gap-3">
+                <a href="#" class="w-8 h-8 bg-gray-800 hover:bg-brand-600 rounded-lg flex items-center justify-center transition">
+                  <i data-lucide="facebook" class="w-4 h-4"></i>
+                </a>
+                <a href="#" class="w-8 h-8 bg-gray-800 hover:bg-brand-600 rounded-lg flex items-center justify-center transition">
+                  <i data-lucide="twitter" class="w-4 h-4"></i>
+                </a>
+                <a href="#" class="w-8 h-8 bg-gray-800 hover:bg-brand-600 rounded-lg flex items-center justify-center transition">
+                  <i data-lucide="linkedin" class="w-4 h-4"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="border-t border-gray-800 pt-6 text-center text-sm text-gray-400">
+            <p>© 2024 แพลตฟอร์มโรงเรียนอัจฉริยะ • ภายส่วนสำหรับหลายผู้เช่า</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <!-- LOGIN SCREEN -->
+    <div id="login-screen" class="h-full w-full hidden flex items-center justify-center bg-gradient-to-br from-brand-50 via-white to-blue-50">
+      <div class="w-full max-w-md mx-4 fade-in">
+        <div class="text-center mb-8">
+          <div class="w-16 h-16 bg-brand-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-brand-200">
+            <i data-lucide="graduation-cap" class="w-8 h-8 text-white"></i>
+          </div>
+          <h1 id="login-title" class="text-2xl font-bold text-gray-800">แพลตฟอร์มโรงเรียนอัจฉริยะ</h1>
+          <p class="text-gray-500 text-sm mt-1">ภายสำหรับหลายผู้เช่า</p>
+        </div>
+        <div id="login-form-container" class="bg-white rounded-2xl shadow-xl shadow-gray-200/50 p-8">
+          <div id="login-step-1">
+            <h2 class="text-lg font-semibold text-gray-700 mb-5">เข้าสู่ระบบ</h2>
+            <div class="space-y-4">
+              <div>
+                <label for="login-school" class="block text-xs font-medium text-gray-500 mb-1.5">รหัสโรงเรียน</label>
+                <input id="login-school" type="text" placeholder="e.g. SCH001" class="w-full px-4 py-3 bg-surface-50 border border-surface-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-300 focus:border-brand-400 transition">
+              </div>
+              <div>
+                <label for="login-username" class="block text-xs font-medium text-gray-500 mb-1.5">ชื่อผู้ใช้</label>
+                <input id="login-username" type="text" placeholder="e.g. admin001" class="w-full px-4 py-3 bg-surface-50 border border-surface-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-300 focus:border-brand-400 transition">
+              </div>
+              <div>
+                <label for="login-password" class="block text-xs font-medium text-gray-500 mb-1.5">รหัสผ่าน</label>
+                <input id="login-password" type="password" placeholder="••••••••" class="w-full px-4 py-3 bg-surface-50 border border-surface-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-300 focus:border-brand-400 transition">
+              </div>
+              <button id="btn-login" class="w-full py-3 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-xl transition shadow-lg shadow-brand-200 active:scale-[0.98]">เข้าสู่ระบบ</button>
+            </div>
+            <div id="login-error" class="hidden mt-3 text-xs text-red-500 bg-red-50 p-3 rounded-lg"></div>
+          </div>
+          <div id="login-step-2" class="hidden text-center">
+            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <i data-lucide="check-circle" class="w-6 h-6 text-green-600"></i>
+            </div>
+            <h3 class="font-semibold text-gray-700 mb-2">พร้อมที่จะดำเนินต่อไปหรือไม่</h3>
+            <p class="text-sm text-gray-500 mb-5">ยินดีต้อนรับ! มาเริ่มการใช้งานกัน</p>
+            <button id="btn-continue" class="w-full py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-xl font-medium transition">กำลังดำเนินการต่อแดชบอร์ด</button>
+            <button id="btn-change-user" class="mt-3 text-xs text-gray-400 hover:text-gray-600 transition">ใช้บัญชีกรรมการอื่น</button>
+          </div>
+        </div>
+        <p class="text-center text-xs text-gray-400 mt-6">© 2024 แพลตฟอร์มโรงเรียนอัจฉริยะ • ภายสำหรับหลายผู้เช่า</p>
+      </div>
+    </div>
+
+    <!-- MAIN APP -->
+    <div id="main-app" class="hidden h-full w-full flex">
+      <!-- Sidebar -->
+      <aside id="sidebar" class="w-64 bg-white border-r border-surface-200 flex flex-col h-full shrink-0">
+        <div class="p-5 border-b border-surface-100">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-brand-600 rounded-xl flex items-center justify-center shadow-md shadow-brand-200">
+              <i data-lucide="graduation-cap" class="w-5 h-5 text-white"></i>
+            </div>
+            <div>
+              <h2 id="school-name-display" class="text-sm font-bold text-gray-800 leading-tight">โรงเรียนตัวอย่าง</h2>
+              <span id="user-role-badge" class="text-[10px] font-semibold bg-brand-100 text-brand-700 px-2 py-0.5 rounded-full uppercase">ผู้ดูแลระบบ</span>
+            </div>
+          </div>
+        </div>
+        <nav id="sidebar-nav" class="flex-1 overflow-y-auto py-3 px-2"></nav>
+        <div class="p-4 border-t border-surface-100">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 bg-surface-200 rounded-full flex items-center justify-center">
+              <i data-lucide="user" class="w-4 h-4 text-gray-500"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p id="user-name-display" class="text-xs font-semibold text-gray-700 truncate">Admin User</p>
+              <p id="user-email-display" class="text-[10px] text-gray-400 truncate">admin@school.com</p>
+            </div>
+            <button id="btn-logout" class="p-1.5 hover:bg-red-50 rounded-lg transition" title="Logout">
+              <i data-lucide="log-out" class="w-4 h-4 text-gray-400 hover:text-red-500"></i>
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <div class="flex-1 flex flex-col h-full overflow-hidden">
+        <!-- Top Bar -->
+        <header class="h-16 bg-white border-b border-surface-200 flex items-center justify-between px-6 shrink-0">
+          <div>
+            <h1 id="page-title" class="text-lg font-bold text-gray-800">Dashboard</h1>
+            <p id="page-breadcrumb" class="text-xs text-gray-400">Overview</p>
+          </div>
+          <div class="flex items-center gap-3">
+            <button class="p-2 hover:bg-surface-100 rounded-xl relative transition">
+              <i data-lucide="bell" class="w-5 h-5 text-gray-500"></i>
+              <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full pulse-dot"></span>
+            </button>
+          </div>
+        </header>
+
+        <!-- Page Content -->
+        <main id="page-content" class="flex-1 overflow-y-auto p-6"></main>
+      </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 space-y-2"></div>
+  </div>
+
+  <!-- External Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- App Module Imports -->
+  <script type="module">
+    import { initApp, initMainApp } from './src/js/app.js';
+    import { completeLogin, handleLogout } from './src/js/auth.js';
+
+    // Expose functions globally
+    window.initMainApp = initMainApp;
+    window.completeLogin = completeLogin;
+    window.handleLogout = handleLogout;
+
+    // Initialize app when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initApp);
+    } else {
+      initApp();
+    }
+  </script>
+</body>
+</html>

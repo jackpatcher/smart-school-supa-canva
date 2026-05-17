@@ -3,11 +3,9 @@
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Smart School Platform</title>
+  <title>แพลตฟอร์มโรงเรียนอัจฉริยะ</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
-  <script src="/_sdk/element_sdk.js"></script>
-  <script src="/_sdk/data_sdk.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
@@ -48,23 +46,23 @@
       <div id="slide-1" class="splash-slide w-full fade-in">
        <div class="w-20 h-20 bg-white bg-opacity-20 rounded-3xl flex items-center justify-center mx-auto mb-6 backdrop-blur-sm"><i data-lucide="graduation-cap" class="w-10 h-10 text-white"></i>
        </div>
-       <h2 class="text-3xl font-bold text-white mb-3">Smart School Platform</h2>
-       <p class="text-white text-opacity-90 text-sm leading-relaxed">All-in-One School Management System<br>
-         Seamlessly manage every aspect of your school</p>
+       <h2 class="text-3xl font-bold text-white mb-3">แพลตฟอร์มโรงเรียนอัจฉริยะ</h2>
+       <p class="text-white text-opacity-90 text-sm leading-relaxed">ระบบจัดการโรงเรียนแบบครบครัน<br>
+         จัดการทุกด้านของโรงเรียนของคุณได้อย่างราบรื่น</p>
       </div>
       <div id="slide-2" class="splash-slide w-full fade-in hidden">
        <div class="w-20 h-20 bg-white bg-opacity-20 rounded-3xl flex items-center justify-center mx-auto mb-6 backdrop-blur-sm"><i data-lucide="users" class="w-10 h-10 text-white"></i>
        </div>
-       <h2 class="text-3xl font-bold text-white mb-3">Multi-Tenant Architecture</h2>
-       <p class="text-white text-opacity-90 text-sm leading-relaxed">Support multiple schools with complete data isolation<br>
-         Secure, scalable, and enterprise-ready</p>
+       <h2 class="text-3xl font-bold text-white mb-3">สถาปัตยกรรมแบบหลายผู้เช่า</h2>
+       <p class="text-white text-opacity-90 text-sm leading-relaxed">สนับสนุนโรงเรียนหลายแห่งพร้อมการแยกข้อมูลที่สมบูรณ์<br>
+         ปลอดภัย ปรับขนาดได้ และพร้อมใช้สำหรับองค์กร</p>
       </div>
       <div id="slide-3" class="splash-slide w-full fade-in hidden">
        <div class="w-20 h-20 bg-white bg-opacity-20 rounded-3xl flex items-center justify-center mx-auto mb-6 backdrop-blur-sm"><i data-lucide="zap" class="w-10 h-10 text-white"></i>
        </div>
-       <h2 class="text-3xl font-bold text-white mb-3">Powerful App Store</h2>
-       <p class="text-white text-opacity-90 text-sm leading-relaxed">Extend functionality with installable apps<br>
-         Customize for your school's unique needs</p>
+       <h2 class="text-3xl font-bold text-white mb-3">แอป สโตร์ที่ทรงพลัง</h2>
+       <p class="text-white text-opacity-90 text-sm leading-relaxed">ขยายฟังก์ชันการทำงานด้วยแอปที่ติดตั้งได้<br>
+         ปรับแต่งตามความต้องการเฉพาะของโรงเรียนของคุณ</p>
       </div>
      </div><!-- Slide Indicators -->
      <div class="flex items-center gap-2 mb-6">
@@ -72,8 +70,8 @@
       <div id="dot-2" class="splash-dot w-2 h-2 bg-white bg-opacity-40 rounded-full transition-all duration-300"></div>
       <div id="dot-3" class="splash-dot w-2 h-2 bg-white bg-opacity-40 rounded-full transition-all duration-300"></div>
      </div><!-- Navigation Buttons -->
-     <div class="flex items-center gap-3 w-full"><button id="btn-splash-prev" class="flex-1 px-4 py-3 bg-white bg-opacity-20 hover:bg-opacity-30 text-white font-medium rounded-xl backdrop-blur-sm transition flex items-center justify-center gap-2"> <i data-lucide="chevron-left" class="w-4 h-4"></i> Previous </button> <button id="btn-splash-next" class="flex-1 px-4 py-3 bg-white hover:bg-opacity-90 text-brand-600 font-medium rounded-xl transition flex items-center justify-center gap-2"> Next <i data-lucide="chevron-right" class="w-4 h-4"></i> </button>
-     </div><button id="btn-splash-skip" class="mt-3 w-full text-white text-opacity-70 hover:text-opacity-100 text-sm font-medium transition"> Skip to App → </button>
+     <div class="flex items-center gap-3 w-full"><button id="btn-splash-prev" class="flex-1 px-4 py-3 bg-white bg-opacity-20 hover:bg-opacity-30 text-white font-medium rounded-xl backdrop-blur-sm transition flex items-center justify-center gap-2"> <i data-lucide="chevron-left" class="w-4 h-4"></i> ก่อนหน้า </button> <button id="btn-splash-next" class="flex-1 px-4 py-3 bg-white hover:bg-opacity-90 text-brand-600 font-medium rounded-xl transition flex items-center justify-center gap-2"> ถัดไป <i data-lucide="chevron-right" class="w-4 h-4"></i> </button>
+     </div><button id="btn-splash-skip" class="mt-3 w-full text-white text-opacity-70 hover:text-opacity-100 text-sm font-medium transition"> ข้ามไปที่แอป → </button>
     </div>
    </div><!-- LANDING PAGE -->
    <div id="landing-page" class="h-full w-full hidden flex flex-col bg-white overflow-y-auto"><!-- Navigation Bar -->
@@ -82,101 +80,187 @@
       <div class="flex items-center gap-3">
        <div class="w-10 h-10 bg-brand-600 rounded-xl flex items-center justify-center shadow-md"><i data-lucide="graduation-cap" class="w-5 h-5 text-white"></i>
        </div>
-       <h1 id="landing-title" class="text-xl font-bold text-gray-800">Smart School Platform</h1>
-      </div><button id="btn-landing-login" class="px-6 py-2.5 bg-brand-600 hover:bg-brand-700 text-white text-sm font-medium rounded-xl transition shadow-md shadow-brand-200"> Sign In </button>
+       <h1 id="landing-title" class="text-xl font-bold text-gray-800">แพลตฟอร์มโรงเรียนอัจฉริยะ</h1>
+      </div><button id="btn-landing-login" class="px-6 py-2.5 bg-brand-600 hover:bg-brand-700 text-white text-sm font-medium rounded-xl transition shadow-md shadow-brand-200"> เข้าสู่ระบบ </button>
      </div>
     </nav><!-- Hero Section -->
     <section class="py-16 px-6 bg-gradient-to-br from-brand-50 via-white to-blue-50">
      <div class="max-w-6xl mx-auto text-center">
       <div class="inline-block mb-4 px-4 py-1.5 bg-brand-100 text-brand-700 rounded-full text-xs font-semibold">
-       ✨ Transform Your School Management
+       ✨ เปลี่ยนแปลงการจัดการโรงเรียนของคุณ
       </div>
-      <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">The Complete <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-blue-600">School Management</span> Solution</h2>
-      <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">Streamline operations, enhance communication, and empower educators with our all-in-one platform designed for modern schools.</p><button id="btn-hero-getstarted" class="px-8 py-3.5 bg-brand-600 hover:bg-brand-700 text-white font-medium rounded-xl shadow-lg shadow-brand-200 transition transform hover:scale-105"> Get Started Now </button>
+      <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">โซลูชั่นการจัดการโรงเรียน<span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-blue-600">ที่สมบูรณ์</span></h2>
+      <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">ปรับปรุงการดำเนินงาน เพิ่มประสิทธิภาพการสื่อสาร และเพิ่มศักยภาพให้ผู้สอนด้วยแพลตฟอร์มแบบครบครันของเราที่ออกแบบมาสำหรับโรงเรียนสมัยใหม่</p><button id="btn-hero-getstarted" class="px-8 py-3.5 bg-brand-600 hover:bg-brand-700 text-white font-medium rounded-xl shadow-lg shadow-brand-200 transition transform hover:scale-105"> เริ่มต้นเลย </button>
      </div>
     </section><!-- Features Grid -->
     <section class="py-16 px-6">
      <div class="max-w-6xl mx-auto">
-      <h3 class="text-2xl font-bold text-gray-900 mb-3 text-center">Key Features</h3>
-      <p class="text-gray-600 text-center mb-12">Everything you need to manage your school efficiently</p>
+      <h3 class="text-2xl font-bold text-gray-900 mb-3 text-center">คุณสมบัติหลัก</h3>
+      <p class="text-gray-600 text-center mb-12">ทุกสิ่งที่คุณต้องการเพื่อจัดการโรงเรียนของคุณได้อย่างมีประสิทธิภาพ</p>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-       ${[ { icon:'users', title:'Student Management', desc:'Comprehensive student records, enrollment, and profile management' }, { icon:'briefcase', title:'Teacher Management', desc:'Manage teacher information, assignments, and performance' }, { icon:'book-open', title:'Academic Tracking', desc:'Classes, subjects, schedules, and academic progress' }, { icon:'wallet', title:'Finance &amp; Billing', desc:'Fee collection, payment tracking, and financial reports' }, { icon:'calendar', title:'Event Calendar', desc:'Schedule and manage school events and announcements' }, { icon:'grid-3x3-gap-filled', title:'App Store', desc:'Extend functionality with installable apps and integrations' } ].map(f =&gt; ` 
        <div class="bg-white rounded-2xl border border-surface-200 p-6 card-hover">
-        <div class="w-12 h-12 bg-brand-100 rounded-xl flex items-center justify-center mb-4"><i data-lucide="${f.icon}" class="w-6 h-6 text-brand-600"></i>
-        </div>
-        <h4 class="text-lg font-semibold text-gray-800 mb-2">${f.title}</h4>
-        <p class="text-sm text-gray-600">${f.desc}</p>
-       </div> `).join('')}
+        <div class="w-12 h-12 bg-brand-100 rounded-xl flex items-center justify-center mb-4"><i data-lucide="users" class="w-6 h-6 text-brand-600"></i></div>
+        <h4 class="text-lg font-semibold text-gray-800 mb-2">การจัดการนักเรียน</h4>
+        <p class="text-sm text-gray-600">บันทึกนักเรียน การลงทะเบียน และการจัดการโปรไฟล์ที่ครอบคลุม</p>
+       </div>
+       <div class="bg-white rounded-2xl border border-surface-200 p-6 card-hover">
+        <div class="w-12 h-12 bg-brand-100 rounded-xl flex items-center justify-center mb-4"><i data-lucide="briefcase" class="w-6 h-6 text-brand-600"></i></div>
+        <h4 class="text-lg font-semibold text-gray-800 mb-2">การจัดการครู</h4>
+        <p class="text-sm text-gray-600">จัดการข้อมูลครู งานมอบหมาย และประสิทธิภาพการทำงาน</p>
+       </div>
+       <div class="bg-white rounded-2xl border border-surface-200 p-6 card-hover">
+        <div class="w-12 h-12 bg-brand-100 rounded-xl flex items-center justify-center mb-4"><i data-lucide="book-open" class="w-6 h-6 text-brand-600"></i></div>
+        <h4 class="text-lg font-semibold text-gray-800 mb-2">การติดตามความก้าวหน้าทางการศึกษา</h4>
+        <p class="text-sm text-gray-600">ชั้นเรียน วิชา ตารางเวลา และความก้าวหน้าทางการศึกษา</p>
+       </div>
+       <div class="bg-white rounded-2xl border border-surface-200 p-6 card-hover">
+        <div class="w-12 h-12 bg-brand-100 rounded-xl flex items-center justify-center mb-4"><i data-lucide="wallet" class="w-6 h-6 text-brand-600"></i></div>
+        <h4 class="text-lg font-semibold text-gray-800 mb-2">การเงินและการเรียกเก็บเงิน</h4>
+        <p class="text-sm text-gray-600">การเก็บค่าเรียน การติดตามการชำระเงิน และรายงานทางการเงิน</p>
+       </div>
+       <div class="bg-white rounded-2xl border border-surface-200 p-6 card-hover">
+        <div class="w-12 h-12 bg-brand-100 rounded-xl flex items-center justify-center mb-4"><i data-lucide="calendar" class="w-6 h-6 text-brand-600"></i></div>
+        <h4 class="text-lg font-semibold text-gray-800 mb-2">ปฏิทินกิจกรรม</h4>
+        <p class="text-sm text-gray-600">วางแผนและจัดการกิจกรรมโรงเรียนและการประกาศณ์</p>
+       </div>
+       <div class="bg-white rounded-2xl border border-surface-200 p-6 card-hover">
+        <div class="w-12 h-12 bg-brand-100 rounded-xl flex items-center justify-center mb-4"><i data-lucide="zap" class="w-6 h-6 text-brand-600"></i></div>
+        <h4 class="text-lg font-semibold text-gray-800 mb-2">แอป สโตร์</h4>
+        <p class="text-sm text-gray-600">ขยายฟังก์ชันการทำงานด้วยแอปที่ติดตั้งได้และการรวมระบบ</p>
+       </div>
       </div>
      </div>
     </section><!-- User Roles Section -->
     <section class="py-16 px-6 bg-surface-50">
      <div class="max-w-6xl mx-auto">
-      <h3 class="text-2xl font-bold text-gray-900 mb-3 text-center">Built for Everyone</h3>
-      <p class="text-gray-600 text-center mb-12">Role-based access for all stakeholders</p>
+      <h3 class="text-2xl font-bold text-gray-900 mb-3 text-center">สร้างมาสำหรับทุกคน</h3>
+      <p class="text-gray-600 text-center mb-12">การเข้าถึงตามบทบาทสำหรับผู้มีส่วนได้ส่วนเสีย</p>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-       ${[ { role:'Admin', desc:'Full system control', icon:'shield', color:'bg-blue-50 text-blue-600' }, { role:'Teachers', desc:'Class management', icon:'book-open', color:'bg-emerald-50 text-emerald-600' }, { role:'Students', desc:'Coursework access', icon:'graduation-cap', color:'bg-violet-50 text-violet-600' }, { role:'Parents', desc:'Progress tracking', icon:'users', color:'bg-pink-50 text-pink-600' }, { role:'Executive', desc:'Analytics &amp; reports', icon:'bar-chart-3', color:'bg-amber-50 text-amber-600' } ].map(r =&gt; ` 
        <div class="bg-white rounded-2xl border border-surface-200 p-5 text-center card-hover">
-        <div class="w-12 h-12 ${r.color} rounded-xl flex items-center justify-center mx-auto mb-3"><i data-lucide="${r.icon}" class="w-6 h-6"></i>
-        </div>
-        <h4 class="font-semibold text-gray-800">${r.role}</h4>
-        <p class="text-xs text-gray-500 mt-1">${r.desc}</p>
-       </div> `).join('')}
+        <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mx-auto mb-3"><i data-lucide="shield" class="w-6 h-6"></i></div>
+        <h4 class="font-semibold text-gray-800">ผู้ดูแลระบบ</h4>
+        <p class="text-xs text-gray-500 mt-1">การควบคุมระบบเต็มรูปแบบ</p>
+       </div>
+       <div class="bg-white rounded-2xl border border-surface-200 p-5 text-center card-hover">
+        <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center mx-auto mb-3"><i data-lucide="book-open" class="w-6 h-6"></i></div>
+        <h4 class="font-semibold text-gray-800">ครู</h4>
+        <p class="text-xs text-gray-500 mt-1">การจัดการชั้นเรียน</p>
+       </div>
+       <div class="bg-white rounded-2xl border border-surface-200 p-5 text-center card-hover">
+        <div class="w-12 h-12 bg-violet-50 text-violet-600 rounded-xl flex items-center justify-center mx-auto mb-3"><i data-lucide="graduation-cap" class="w-6 h-6"></i></div>
+        <h4 class="font-semibold text-gray-800">นักเรียน</h4>
+        <p class="text-xs text-gray-500 mt-1">การเข้าถึงงานวิชา</p>
+       </div>
+       <div class="bg-white rounded-2xl border border-surface-200 p-5 text-center card-hover">
+        <div class="w-12 h-12 bg-pink-50 text-pink-600 rounded-xl flex items-center justify-center mx-auto mb-3"><i data-lucide="users" class="w-6 h-6"></i></div>
+        <h4 class="font-semibold text-gray-800">พ่อแม่</h4>
+        <p class="text-xs text-gray-500 mt-1">การติดตามความก้าวหน้า</p>
+       </div>
+       <div class="bg-white rounded-2xl border border-surface-200 p-5 text-center card-hover">
+        <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center mx-auto mb-3"><i data-lucide="bar-chart-3" class="w-6 h-6"></i></div>
+        <h4 class="font-semibold text-gray-800">ผู้บริหาร</h4>
+        <p class="text-xs text-gray-500 mt-1">การวิเคราะห์และรายงาน</p>
+       </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- Stats Section -->
+    <section class="py-16 px-6 bg-surface-50">
+     <div class="max-w-6xl mx-auto">
+      <h3 class="text-2xl font-bold text-gray-900 mb-3 text-center">สร้างมาสำหรับทุกคน</h3>
+      <p class="text-gray-600 text-center mb-12">การเข้าถึงตามบทบาทสำหรับผู้มีส่วนได้ส่วนเสีย</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+       <div class="bg-white rounded-2xl border border-surface-200 p-5 text-center card-hover">
+        <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mx-auto mb-3"><i data-lucide="shield" class="w-6 h-6"></i></div>
+        <h4 class="font-semibold text-gray-800">ผู้ดูแลระบบ</h4>
+        <p class="text-xs text-gray-500 mt-1">การควบคุมระบบเต็มรูปแบบ</p>
+       </div>
+       <div class="bg-white rounded-2xl border border-surface-200 p-5 text-center card-hover">
+        <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center mx-auto mb-3"><i data-lucide="book-open" class="w-6 h-6"></i></div>
+        <h4 class="font-semibold text-gray-800">ครู</h4>
+        <p class="text-xs text-gray-500 mt-1">การจัดการชั้นเรียน</p>
+       </div>
+       <div class="bg-white rounded-2xl border border-surface-200 p-5 text-center card-hover">
+        <div class="w-12 h-12 bg-violet-50 text-violet-600 rounded-xl flex items-center justify-center mx-auto mb-3"><i data-lucide="graduation-cap" class="w-6 h-6"></i></div>
+        <h4 class="font-semibold text-gray-800">นักเรียน</h4>
+        <p class="text-xs text-gray-500 mt-1">การเข้าถึงงานวิชา</p>
+       </div>
+       <div class="bg-white rounded-2xl border border-surface-200 p-5 text-center card-hover">
+        <div class="w-12 h-12 bg-pink-50 text-pink-600 rounded-xl flex items-center justify-center mx-auto mb-3"><i data-lucide="users" class="w-6 h-6"></i></div>
+        <h4 class="font-semibold text-gray-800">พ่อแม่</h4>
+        <p class="text-xs text-gray-500 mt-1">การติดตามความก้าวหน้า</p>
+       </div>
+       <div class="bg-white rounded-2xl border border-surface-200 p-5 text-center card-hover">
+        <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center mx-auto mb-3"><i data-lucide="bar-chart-3" class="w-6 h-6"></i></div>
+        <h4 class="font-semibold text-gray-800">ผู้บริหาร</h4>
+        <p class="text-xs text-gray-500 mt-1">การวิเคราะห์และรายงาน</p>
+       </div>
       </div>
      </div>
     </section><!-- Stats Section -->
     <section class="py-16 px-6">
      <div class="max-w-6xl mx-auto">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-       ${[ { stat:'10,000+', label:'Schools Worldwide' }, { stat:'500K+', label:'Active Users' }, { stat:'99.9%', label:'Uptime' }, { stat:'24/7', label:'Support' } ].map(s =&gt; ` 
        <div class="text-center">
-        <p class="text-4xl font-bold text-brand-600 mb-1">${s.stat}</p>
-        <p class="text-gray-600">${s.label}</p>
-       </div> `).join('')}
+        <p class="text-4xl font-bold text-brand-600 mb-1">10,000+</p>
+        <p class="text-gray-600">โรงเรียนทั่วโลก</p>
+       </div>
+       <div class="text-center">
+        <p class="text-4xl font-bold text-brand-600 mb-1">500K+</p>
+        <p class="text-gray-600">ผู้ใช้ที่ใช้งานอยู่</p>
+       </div>
+       <div class="text-center">
+        <p class="text-4xl font-bold text-brand-600 mb-1">99.9%</p>
+        <p class="text-gray-600">เวลาเปิดทำการ</p>
+       </div>
+       <div class="text-center">
+        <p class="text-4xl font-bold text-brand-600 mb-1">24/7</p>
+        <p class="text-gray-600">การสนับสนุน</p>
+       </div>
       </div>
      </div>
     </section><!-- CTA Section -->
     <section class="py-16 px-6 bg-gradient-to-r from-brand-600 to-blue-600">
      <div class="max-w-4xl mx-auto text-center">
-      <h3 class="text-3xl font-bold text-white mb-4">Ready to Transform Your School?</h3>
-      <p class="text-white text-opacity-90 mb-8">Start managing your school more efficiently today. Sign in to access all features.</p><button id="btn-cta-login" class="px-8 py-3.5 bg-white hover:bg-opacity-90 text-brand-600 font-medium rounded-xl transition shadow-lg transform hover:scale-105"> Sign In to Dashboard </button>
+      <h3 class="text-3xl font-bold text-white mb-4">พร้อมเปลี่ยนแปลงโรงเรียนของคุณหรือไม่</h3>
+      <p class="text-white text-opacity-90 mb-8">เริ่มจัดการโรงเรียนของคุณได้อย่างมีประสิทธิภาพในวันนี้ เข้าสู่ระบบเพื่อเข้าถึงคุณสมบัติทั้งหมด</p><button id="btn-cta-login" class="px-8 py-3.5 bg-white hover:bg-opacity-90 text-brand-600 font-medium rounded-xl transition shadow-lg transform hover:scale-105"> เข้าสู่ระบบแดชบอร์ด </button>
      </div>
     </section><!-- Footer -->
     <footer class="bg-gray-900 text-white py-8 px-6">
      <div class="max-w-6xl mx-auto">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
        <div>
-        <h4 class="font-semibold mb-3">Product</h4>
+        <h4 class="font-semibold mb-3">รายละอิย</h4>
         <ul class="space-y-2 text-sm text-gray-400">
-         <li><a href="#" class="hover:text-white transition">Features</a></li>
-         <li><a href="#" class="hover:text-white transition">Pricing</a></li>
-         <li><a href="#" class="hover:text-white transition">Security</a></li>
+         <li><a href="#" class="hover:text-white transition">คุณสมบัติ</a></li>
+         <li><a href="#" class="hover:text-white transition">เงิน</a></li>
+         <li><a href="#" class="hover:text-white transition">ความปลอดภัย</a></li>
         </ul>
        </div>
        <div>
-        <h4 class="font-semibold mb-3">Company</h4>
+        <h4 class="font-semibold mb-3">บริษัท</h4>
         <ul class="space-y-2 text-sm text-gray-400">
-         <li><a href="#" class="hover:text-white transition">About</a></li>
-         <li><a href="#" class="hover:text-white transition">Blog</a></li>
-         <li><a href="#" class="hover:text-white transition">Careers</a></li>
+         <li><a href="#" class="hover:text-white transition">เกี่ยวกับ</a></li>
+         <li><a href="#" class="hover:text-white transition">บล็อก</a></li>
+         <li><a href="#" class="hover:text-white transition">อาชีเร</a></li>
         </ul>
        </div>
        <div>
-        <h4 class="font-semibold mb-3">Support</h4>
+        <h4 class="font-semibold mb-3">สนับสนุน</h4>
         <ul class="space-y-2 text-sm text-gray-400">
-         <li><a href="#" class="hover:text-white transition">Help Center</a></li>
-         <li><a href="#" class="hover:text-white transition">Documentation</a></li>
-         <li><a href="#" class="hover:text-white transition">Contact</a></li>
+         <li><a href="#" class="hover:text-white transition">ศูนย์บาต</a></li>
+         <li><a href="#" class="hover:text-white transition">เอกสาร</a></li>
+         <li><a href="#" class="hover:text-white transition">ติดต่อ</a></li>
         </ul>
        </div>
        <div>
-        <h4 class="font-semibold mb-3">Follow Us</h4>
+        <h4 class="font-semibold mb-3">ทำตามเรา</h4>
         <div class="flex gap-3"><a href="#" class="w-8 h-8 bg-gray-800 hover:bg-brand-600 rounded-lg flex items-center justify-center transition"> <i data-lucide="facebook" class="w-4 h-4"></i> </a> <a href="#" class="w-8 h-8 bg-gray-800 hover:bg-brand-600 rounded-lg flex items-center justify-center transition"> <i data-lucide="twitter" class="w-4 h-4"></i> </a> <a href="#" class="w-8 h-8 bg-gray-800 hover:bg-brand-600 rounded-lg flex items-center justify-center transition"> <i data-lucide="linkedin" class="w-4 h-4"></i> </a>
         </div>
        </div>
       </div>
       <div class="border-t border-gray-800 pt-6 text-center text-sm text-gray-400">
-       <p>© 2024 Smart School Platform. All rights reserved.</p>
+       <p>© 2024 แพลตฟอร์มโรงเรียนอัจฉริยะ • ภายส่วนสำหรับหลายผู้เช่า</p>
       </div>
      </div>
     </footer>
@@ -186,30 +270,30 @@
      <div class="text-center mb-8">
       <div class="w-16 h-16 bg-brand-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-brand-200"><i data-lucide="graduation-cap" class="w-8 h-8 text-white"></i>
       </div>
-      <h1 id="login-title" class="text-2xl font-bold text-gray-800">Smart School Platform</h1>
-      <p class="text-gray-500 text-sm mt-1">Multi-School ERP System</p>
+      <h1 id="login-title" class="text-2xl font-bold text-gray-800">แพลตฟอร์มโรงเรียนอัจฉริยะ</h1>
+      <p class="text-gray-500 text-sm mt-1">ภายสำหรับหลายผู้เช่า</p>
      </div>
      <div id="login-form-container" class="bg-white rounded-2xl shadow-xl shadow-gray-200/50 p-8">
       <div id="login-step-1">
-       <h2 class="text-lg font-semibold text-gray-700 mb-5">Sign In</h2>
+       <h2 class="text-lg font-semibold text-gray-700 mb-5">เข้าสู่ระบบ</h2>
        <div class="space-y-4">
-        <div><label for="login-school" class="block text-xs font-medium text-gray-500 mb-1.5">School Code</label> <input id="login-school" type="text" placeholder="e.g. SCH001" class="w-full px-4 py-3 bg-surface-50 border border-surface-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-300 focus:border-brand-400 transition">
+        <div><label for="login-school" class="block text-xs font-medium text-gray-500 mb-1.5">รหัสโรงเรียน</label> <input id="login-school" type="text" placeholder="e.g. SCH001" class="w-full px-4 py-3 bg-surface-50 border border-surface-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-300 focus:border-brand-400 transition">
         </div>
-        <div><label for="login-username" class="block text-xs font-medium text-gray-500 mb-1.5">Username</label> <input id="login-username" type="text" placeholder="e.g. admin001" class="w-full px-4 py-3 bg-surface-50 border border-surface-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-300 focus:border-brand-400 transition">
+        <div><label for="login-username" class="block text-xs font-medium text-gray-500 mb-1.5">ชื่อผู้ใช้</label> <input id="login-username" type="text" placeholder="e.g. admin001" class="w-full px-4 py-3 bg-surface-50 border border-surface-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-300 focus:border-brand-400 transition">
         </div>
-        <div><label for="login-password" class="block text-xs font-medium text-gray-500 mb-1.5">Password</label> <input id="login-password" type="password" placeholder="••••••••" class="w-full px-4 py-3 bg-surface-50 border border-surface-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-300 focus:border-brand-400 transition">
-        </div><button id="btn-login" class="w-full py-3 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-xl transition shadow-lg shadow-brand-200 active:scale-[0.98]">Sign In</button>
+        <div><label for="login-password" class="block text-xs font-medium text-gray-500 mb-1.5">รหัสผ่าน</label> <input id="login-password" type="password" placeholder="••••••••" class="w-full px-4 py-3 bg-surface-50 border border-surface-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-300 focus:border-brand-400 transition">
+        </div><button id="btn-login" class="w-full py-3 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-xl transition shadow-lg shadow-brand-200 active:scale-[0.98]">เข้าสู่ระบบ</button>
        </div>
        <div id="login-error" class="hidden mt-3 text-xs text-red-500 bg-red-50 p-3 rounded-lg"></div>
       </div>
       <div id="login-step-2" class="hidden text-center">
        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"><i data-lucide="check-circle" class="w-6 h-6 text-green-600"></i>
        </div>
-       <h3 class="font-semibold text-gray-700 mb-2">Ready to continue?</h3>
-       <p class="text-sm text-gray-500 mb-5">You're all set! Let's get started.</p><button id="btn-continue" class="w-full py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-xl font-medium transition">Continue to Dashboard</button> <button id="btn-change-user" class="mt-3 text-xs text-gray-400 hover:text-gray-600 transition">Use different account</button>
+       <h3 class="font-semibold text-gray-700 mb-2">พร้อมที่จะดำเนินต่อไปหรือไม่</h3>
+       <p class="text-sm text-gray-500 mb-5">เรยผ้ขอบรี! มาเริ่มการใช้งานกันเตอจังวัตถุ</p><button id="btn-continue" class="w-full py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-xl font-medium transition">กรำจัชหินต่อแดชบอร์ด</button> <button id="btn-change-user" class="mt-3 text-xs text-gray-400 hover:text-gray-600 transition">ใช้บัญชีกรรมการอื่น</button>
       </div>
      </div>
-     <p class="text-center text-xs text-gray-400 mt-6">© 2024 Smart School Platform • Multi-Tenant ERP</p>
+     <p class="text-center text-xs text-gray-400 mt-6">© 2024 แพลตฟอร์มโรงเรียนอัจฉริยะ • ภายสำหรับหลายผู้เช่า</p>
     </div>
    </div><!-- MAIN APP -->
    <div id="main-app" class="hidden h-full w-full flex"><!-- Sidebar -->
@@ -219,7 +303,7 @@
        <div class="w-10 h-10 bg-brand-600 rounded-xl flex items-center justify-center shadow-md shadow-brand-200"><i data-lucide="graduation-cap" class="w-5 h-5 text-white"></i>
        </div>
        <div>
-        <h2 id="school-name-display" class="text-sm font-bold text-gray-800 leading-tight">Demo School</h2><span id="user-role-badge" class="text-[10px] font-semibold bg-brand-100 text-brand-700 px-2 py-0.5 rounded-full uppercase">Admin</span>
+        <h2 id="school-name-display" class="text-sm font-bold text-gray-800 leading-tight">โรงเรียนตัวอย่าง</h2><span id="user-role-badge" class="text-[10px] font-semibold bg-brand-100 text-brand-700 px-2 py-0.5 rounded-full uppercase">ผู้ดูแลระบบ</span>
        </div>
       </div>
      </div>
@@ -255,12 +339,12 @@
 // SPLASH SCREEN & LANDING PAGE LOGIC
 // ============================================
 
-let currentSlide = 1;
-const totalSlides = 3;
+window.currentSlide = 1;
+window.totalSlides = 3;
 
 function updateSplashSlide() {
     // Hide all slides
-    for (let i = 1; i <= totalSlides; i++) {
+    for (let i = 1; i <= window.totalSlides; i++) {
         const slide = document.getElementById(`slide-${i}`);
         const dot = document.getElementById(`dot-${i}`);
         slide.classList.add('hidden');
@@ -269,15 +353,15 @@ function updateSplashSlide() {
     }
 
     // Show current slide
-    const currentSlideEl = document.getElementById(`slide-${currentSlide}`);
-    const currentDot = document.getElementById(`dot-${currentSlide}`);
+    const currentSlideEl = document.getElementById(`slide-${window.currentSlide}`);
+    const currentDot = document.getElementById(`dot-${window.currentSlide}`);
     currentSlideEl.classList.remove('hidden');
     currentDot.classList.add('w-2.5', 'h-2.5');
     currentDot.classList.remove('w-2', 'h-2', 'bg-opacity-40');
 
     // Update button states
-    document.getElementById('btn-splash-prev').disabled = currentSlide === 1;
-    document.getElementById('btn-splash-prev').style.opacity = currentSlide === 1 ? '0.5' : '1';
+    document.getElementById('btn-splash-prev').disabled = window.currentSlide === 1;
+    document.getElementById('btn-splash-prev').style.opacity = window.currentSlide === 1 ? '0.5' : '1';
 }
 
 function goToLandingPage() {
@@ -293,32 +377,53 @@ function goToLoginPage() {
     lucide.createIcons();
 }
 
-// Splash screen events
-document.getElementById('btn-splash-prev').addEventListener('click', () => {
-    if (currentSlide > 1) {
-        currentSlide--;
-        updateSplashSlide();
+// Splash screen events - Attach directly
+(function attachEvents() {
+    const prevBtn = document.getElementById('btn-splash-prev');
+    const nextBtn = document.getElementById('btn-splash-next');
+    const skipBtn = document.getElementById('btn-splash-skip');
+    const loginBtn = document.getElementById('btn-landing-login');
+    const getStartedBtn = document.getElementById('btn-hero-getstarted');
+    const ctaBtn = document.getElementById('btn-cta-login');
+    
+    if (prevBtn) {
+        prevBtn.addEventListener('click', function() {
+            console.log('Prev clicked, current:', window.currentSlide);
+            if (window.currentSlide > 1) {
+                window.currentSlide--;
+                updateSplashSlide();
+            }
+        });
     }
-});
-
-document.getElementById('btn-splash-next').addEventListener('click', () => {
-    if (currentSlide < totalSlides) {
-        currentSlide++;
-        updateSplashSlide();
-    } else {
-        goToLandingPage();
+    
+    if (nextBtn) {
+        nextBtn.addEventListener('click', function() {
+            console.log('Next clicked, current:', window.currentSlide);
+            if (window.currentSlide < window.totalSlides) {
+                window.currentSlide++;
+                updateSplashSlide();
+            } else {
+                goToLandingPage();
+            }
+        });
     }
-});
+    
+    if (skipBtn) skipBtn.addEventListener('click', goToLandingPage);
+    if (loginBtn) loginBtn.addEventListener('click', goToLoginPage);
+    if (getStartedBtn) getStartedBtn.addEventListener('click', goToLoginPage);
+    if (ctaBtn) ctaBtn.addEventListener('click', goToLoginPage);
+    
+    // Initialize splash screen
+    updateSplashSlide();
+    
+    // Render lucide icons
+    lucide.createIcons();
+})();
 
-document.getElementById('btn-splash-skip').addEventListener('click', goToLandingPage);
-
-// Landing page events
-document.getElementById('btn-landing-login').addEventListener('click', goToLoginPage);
-document.getElementById('btn-hero-getstarted').addEventListener('click', goToLoginPage);
-document.getElementById('btn-cta-login').addEventListener('click', goToLoginPage);
-
-// Initialize splash screen
-updateSplashSlide();
+// Fallback render icons
+if (typeof lucide !== 'undefined') {
+    lucide.createIcons();
+}
 
 // ============================================
 
@@ -564,37 +669,37 @@ const DEMO_USERS = {
 
 const CORE_MODULES = {
     admin: [
-        { id:'dashboard', icon:'layout-dashboard', label:'Dashboard' },
-        { id:'students', icon:'graduation-cap', label:'Students' },
-        { id:'teachers', icon:'briefcase', label:'Teachers' },
-        { id:'academic', icon:'book-open', label:'Academic' },
-        { id:'finance', icon:'wallet', label:'Finance' },
-        { id:'reports', icon:'bar-chart-3', label:'Reports' },
-        { id:'app-management', icon:'sliders-horizontal', label:'App Management' },
-        { id:'app-store', icon:'grid-3x3-gap-filled', label:'App Store' },
-        { id:'settings', icon:'settings', label:'Settings' }
+        { id:'dashboard', icon:'layout-dashboard', label:'แดชบอร์ด' },
+        { id:'students', icon:'graduation-cap', label:'นักเรียน' },
+        { id:'teachers', icon:'briefcase', label:'ครู' },
+        { id:'academic', icon:'book-open', label:'การศึกษา' },
+        { id:'finance', icon:'wallet', label:'การเงิน' },
+        { id:'reports', icon:'bar-chart-3', label:'รายงาน' },
+        { id:'app-management', icon:'sliders-horizontal', label:'การจัดการแอป' },
+        { id:'app-store', icon:'grid-3x3-gap-filled', label:'ร้านแอป' },
+        { id:'settings', icon:'settings', label:'การตั้งค่า' }
     ],
     teacher: [
-        { id:'dashboard', icon:'layout-dashboard', label:'Dashboard' },
-        { id:'academic', icon:'book-open', label:'My Classes' },
-        { id:'students', icon:'users', label:'My Students' },
-        { id:'app-store', icon:'grid-3x3-gap-filled', label:'App Store' }
+        { id:'dashboard', icon:'layout-dashboard', label:'แดชบอร์ด' },
+        { id:'academic', icon:'book-open', label:'ชั้นเรียนของผม' },
+        { id:'students', icon:'users', label:'นักเรียนของผม' },
+        { id:'app-store', icon:'grid-3x3-gap-filled', label:'ร้านแอป' }
     ],
     student: [
-        { id:'dashboard', icon:'layout-dashboard', label:'Dashboard' },
-        { id:'academic', icon:'book-open', label:'My Courses' },
-        { id:'app-store', icon:'grid-3x3-gap-filled', label:'App Store' }
+        { id:'dashboard', icon:'layout-dashboard', label:'แดชบอร์ด' },
+        { id:'academic', icon:'book-open', label:'คอร์สของผม' },
+        { id:'app-store', icon:'grid-3x3-gap-filled', label:'ร้านแอป' }
     ],
     parent: [
-        { id:'dashboard', icon:'layout-dashboard', label:'Dashboard' },
-        { id:'app-store', icon:'grid-3x3-gap-filled', label:'App Store' }
+        { id:'dashboard', icon:'layout-dashboard', label:'แดชบอร์ด' },
+        { id:'app-store', icon:'grid-3x3-gap-filled', label:'ร้านแอป' }
     ],
     executive: [
-        { id:'dashboard', icon:'layout-dashboard', label:'Dashboard' },
-        { id:'reports', icon:'bar-chart-3', label:'Analytics' },
-        { id:'finance', icon:'wallet', label:'Finance' },
-        { id:'app-management', icon:'sliders-horizontal', label:'App Management' },
-        { id:'app-store', icon:'grid-3x3-gap-filled', label:'App Store' }
+        { id:'dashboard', icon:'layout-dashboard', label:'แดชบอร์ด' },
+        { id:'reports', icon:'bar-chart-3', label:'การวิเคราะห์' },
+        { id:'finance', icon:'wallet', label:'การเงิน' },
+        { id:'app-management', icon:'sliders-horizontal', label:'การจัดการแอป' },
+        { id:'app-store', icon:'grid-3x3-gap-filled', label:'ร้านแอป' }
     ]
 };
 
@@ -689,8 +794,9 @@ let dataHandler = {
 };
 
 async function initDataSDK() {
-    const result = await window.dataSdk.init(dataHandler);
-    if (!result.isOk) console.error('Data SDK init error:', result.error);
+    // SDK not available - commenting out
+    // const result = await window.dataSdk.init(dataHandler);
+    // if (!result.isOk) console.error('Data SDK init error:', result.error);
 }
 
 // ============================================
@@ -705,7 +811,7 @@ function initMainApp() {
     loadUserInstalledApps();
     renderSidebar();
     navigateTo('dashboard');
-    initDataSDK();
+    // initDataSDK(); // SDK not available
 }
 
 function loadUserInstalledApps() {
@@ -1099,6 +1205,8 @@ const defaultConfig = {
     accent_color: '#059669'
 };
 
+// SDK initialization (commented out - SDK files not available)
+/*
 window.elementSdk.init({
     defaultConfig,
     onConfigChange: async (config) => {
@@ -1128,157 +1236,13 @@ window.elementSdk.init({
         ['supabase_key', config.supabase_key || '']
     ])
 });
+*/
 
 lucide.createIcons();
   </script>
   <script>
-// ============================================
-// SMART SCHOOL PLATFORM - Core Application
-// ============================================
-
-const APP_STATE = {
-    currentUser: null,
-    currentSchool: null,
-    currentRole: 'admin',
-    currentModule: 'dashboard',
-    isAuthenticated: false,
-    allUsers: []
-};
-
-// Demo users database with persistent storage
-const DEMO_USERS = {
-    'SCH001': {
-        school_name: 'Bright Future Academy',
-        school_code: 'SCH001',
-        theme_color: '#2563eb',
-        users: {
-            'admin001': { password: 'admin123', role: 'admin', name: 'Sarah Johnson', email: 'sarah@brightfuture.edu', phone: '+1-555-0101' },
-            'teacher001': { password: 'teach123', role: 'teacher', name: 'Michael Chen', email: 'michael@brightfuture.edu', phone: '+1-555-0102' },
-            'student001': { password: 'stud123', role: 'student', name: 'Emma Wilson', email: 'emma@brightfuture.edu', phone: '+1-555-0103' },
-            'parent001': { password: 'par123', role: 'parent', name: 'Robert Wilson', email: 'robert@brightfuture.edu', phone: '+1-555-0104' },
-            'exec001': { password: 'exec123', role: 'executive', name: 'Diana Roberts', email: 'diana@brightfuture.edu', phone: '+1-555-0105' }
-        }
-    },
-    'SCH002': {
-        school_name: 'Green Valley School',
-        school_code: 'SCH002',
-        theme_color: '#059669',
-        users: {
-            'admin001': { password: 'admin123', role: 'admin', name: 'John Smith', email: 'john@greenvalley.edu', phone: '+1-555-0201' }
-        }
-    }
-};
-
-// ============================================
-// DATA SDK INTEGRATION
-// ============================================
-
-let dataHandler = {
-    onDataChanged(data) {
-        APP_STATE.allUsers = data || [];
-        if (APP_STATE.currentModule === 'admin-users') {
-            renderAdminUsersTable();
-        }
-    }
-};
-
-async function initDataSDK() {
-    const result = await window.dataSdk.init(dataHandler);
-    if (!result.isOk) {
-        console.error('Failed to initialize data SDK:', result.error);
-    }
-}
-
-async function loadUsersFromDatabase() {
-    const result = await window.dataSdk.readAll?.() || { isOk: true, data: [] };
-    if (result.isOk) {
-        APP_STATE.allUsers = result.data || [];
-    }
-}
-
-async function saveUserToDatabase(userData) {
-    if (!APP_STATE.currentUser) return false;
-    
-    const record = {
-        id: userData.id || `user_${Date.now()}`,
-        school_code: APP_STATE.currentSchool.code,
-        user_id: APP_STATE.currentUser.username,
-        username: userData.username || '',
-        role: userData.role || 'user',
-        name: userData.name || '',
-        email: userData.email || '',
-        phone: userData.phone || '',
-        status: userData.status || 'active',
-        created_at: userData.created_at || new Date().toISOString(),
-        updated_at: new Date().toISOString()
-    };
-
-    if (userData.__backendId) {
-        const result = await window.dataSdk.update(record);
-        if (result.isOk) {
-            showToast('User updated successfully', 'success');
-            return true;
-        } else {
-            showToast('Failed to update user', 'error');
-            return false;
-        }
-    } else {
-        const result = await window.dataSdk.create(record);
-        if (result.isOk) {
-            showToast('User added successfully', 'success');
-            return true;
-        } else {
-            showToast('Failed to add user', 'error');
-            return false;
-        }
-    }
-}
-
-async function deleteUserFromDatabase(record) {
-    const result = await window.dataSdk.delete(record);
-    if (result.isOk) {
-        showToast('User deleted successfully', 'success');
-        return true;
-    } else {
-        showToast('Failed to delete user', 'error');
-        return false;
-    }
-}
-    teacher: [
-        { id:'dashboard', icon:'layout-dashboard', label:'Dashboard' },
-        { id:'academic', icon:'book-open', label:'My Classes' },
-        { id:'students', icon:'users', label:'My Students' },
-        { id:'attendance', icon:'check-square', label:'Attendance' },
-        { id:'grades', icon:'file-text', label:'Grades' },
-        { id:'notifications', icon:'bell', label:'Notifications' }
-    ],
-    student: [
-        { id:'dashboard', icon:'layout-dashboard', label:'Dashboard' },
-        { id:'academic', icon:'book-open', label:'My Courses' },
-        { id:'grades', icon:'award', label:'My Grades' },
-        { id:'attendance', icon:'calendar', label:'Attendance' },
-        { id:'library', icon:'book', label:'Library' },
-        { id:'notifications', icon:'bell', label:'Notifications' }
-    ],
-    parent: [
-        { id:'dashboard', icon:'layout-dashboard', label:'Dashboard' },
-        { id:'children', icon:'users', label:'My Children' },
-        { id:'grades', icon:'award', label:'Grades' },
-        { id:'finance', icon:'wallet', label:'Payments' },
-        { id:'notifications', icon:'bell', label:'Notifications' }
-    ],
-    executive: [
-        { id:'dashboard', icon:'layout-dashboard', label:'Dashboard' },
-        { id:'reports', icon:'bar-chart-3', label:'Analytics' },
-        { id:'finance', icon:'wallet', label:'Finance' },
-        { id:'school-office', icon:'building-2', label:'School Office' },
-        { id:'settings', icon:'settings', label:'Settings' }
-    ]
-};
-
-// ============================================
-// AUTH SYSTEM
-// ============================================
+    // ============================================
+    // AUTH SYSTEM
 
 function handleLogin(e) {
     e.preventDefault();
@@ -1948,6 +1912,8 @@ function getGenericModule(id) {
 }
 
 function getDashboardContent() {
+    return `<div class="bg-white rounded-2xl border border-surface-200 p-8 text-center"><p class="text-gray-500">Dashboard content loading...</p></div>`;
+}
 </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9fd352bf46b345c3',t:'MTc3OTAyODI2MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
